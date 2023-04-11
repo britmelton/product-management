@@ -22,6 +22,12 @@ namespace catalog_spec.Products
         }
 
         [Fact]
+        public void ThenIdIsSet()
+        {
+            _product.Id.Should().NotBeEmpty();
+        }
+
+        [Fact]
         public void ThenNameIsSet()
         {
             _product.Name.Should().Be(_name);
