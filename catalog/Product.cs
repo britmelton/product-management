@@ -14,5 +14,11 @@
             Sku = sku;
             Id = id == default ? Guid.NewGuid() : id;
         }
+
+        public string EditName(string newName)
+        {
+            Name = newName;
+            return Name;
+        }
     }
 }
