@@ -4,15 +4,19 @@
     {
         public string Description { get; set; }
         public Guid Id { get; }
+        public bool IsActive { get; set; }
+        public bool IsStaged { get; set; }
         public string Name { get; set; }
         public Sku Sku { get; set; }
 
-        public Product(string description, string name, Sku sku, Guid id = default)
+        public Product(string description, string name, Sku sku, bool isActive = false, bool isStaged = true, Guid id = default)
         {
             Description = description;
             Name = name;
             Sku = sku;
             Id = id == default ? Guid.NewGuid() : id;
+            IsActive = isActive;
+            IsStaged = isStaged;
         }
 
         public string EditName(string newName)

@@ -14,7 +14,7 @@ namespace catalog_infrastructure
         public Product Find(Guid id)
         {
             var dbProduct = _context.Product.Find(id);
-            var product = new Product(dbProduct.Description, dbProduct.Name, dbProduct.Sku, dbProduct.Id);
+            var product = new Product(dbProduct.Description, dbProduct.Name, dbProduct.Sku, dbProduct.IsActive, dbProduct.IsStaged, dbProduct.Id);
             return product;
         }
 

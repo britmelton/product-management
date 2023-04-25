@@ -8,15 +8,19 @@ namespace catalog_infrastructure
         {
         }
 
-        public string Sku { get; set; }
-        public string Name { get; set; }
         public string Description { get; set; }
+        public bool IsActive { get; set; }
+        public bool IsStaged { get; set; }
+        public string Name { get; set; }
+        public string Sku { get; set; }
 
         public ProductDto(Product product) : base(product.Id)
         {
-            Sku = product.Sku;
-            Name = product.Name;
             Description = product.Description;
+            IsActive = product.IsActive;
+            IsStaged = product.IsStaged;
+            Name = product.Name;
+            Sku = product.Sku;
         }
 
         public ProductDto Update(Product product)

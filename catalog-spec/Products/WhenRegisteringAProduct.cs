@@ -22,6 +22,18 @@ namespace catalog_spec.Products
         }
 
         [Fact]
+        public void ThenIsActiveReturnsFalse()
+        {
+            _product.IsActive.Should().BeFalse();
+        }
+
+        [Fact]
+        public void ThenIsStagedReturnsTrue()
+        {
+            _product.IsStaged.Should().BeTrue();
+        }
+
+        [Fact]
         public void ThenIdIsSet()
         {
             _product.Id.Should().NotBeEmpty();
