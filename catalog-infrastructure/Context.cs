@@ -7,5 +7,7 @@ namespace catalog_infrastructure
         public Context(DbContextOptions<Context> options) : base(options)
         {
         }
+
+        public DbSet<ProductDto> Product { get; set; }
     }
 }

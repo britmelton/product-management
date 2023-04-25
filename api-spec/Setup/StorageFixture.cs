@@ -8,7 +8,7 @@ namespace api_spec.Setup
     public class StorageFixture : IDisposable
     {
         private const string ConnectionString =
-            "Server=SUGA;Database=ShopTest;IntegratedSecurity=true;";
+            "Server=SUGA;Database=ShopTest;Integrated Security=true;TrustServerCertificate=true;";
 
         private static readonly object Lock = new();
 
