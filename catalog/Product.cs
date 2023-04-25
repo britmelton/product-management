@@ -19,6 +19,12 @@
             IsStaged = isStaged;
         }
 
+        public void Activate()
+        {
+            IsActive = true;
+            IsStaged = false;
+        }
+
         public string EditName(string newName)
         {
             Name = newName;

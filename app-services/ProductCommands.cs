@@ -11,8 +11,8 @@
     );
 
     public record RegisterProductCommand(
-        string Name,
         string Description,
+        string Name,
         string Sku
     );
 }

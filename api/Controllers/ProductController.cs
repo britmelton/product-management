@@ -42,7 +42,7 @@ namespace api.Controllers
         public ActionResult<ProductDto> Find(Guid id)
         {
             var product = _productRepo.Find(id);
-            var productDto = new ProductDto(product.Name, product.Description, product.Sku);
+            var productDto = new ProductDto(product.Description, product.Name, product.Sku);
             return productDto;
         }
 
@@ -50,7 +50,7 @@ namespace api.Controllers
         public IActionResult RegisterProduct([FromBody] RegisterProductDto dto)
         {
             var (name, description, sku) = dto;
-            var command = new RegisterProductCommand(name, description, sku);
+            var command = new RegisterProductCommand(description, name, sku);
             var productId = _productService.Register(command);
 
             return CreatedAtRoute(nameof(Find), new { id = productId }, null);
