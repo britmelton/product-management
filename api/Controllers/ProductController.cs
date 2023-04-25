@@ -18,6 +18,16 @@ namespace api.Controllers
             _productService = productService;
         }
 
+        [HttpPut("{id}/description")]
+        public IActionResult EditDescription([FromBody] EditDescriptionDto dto)
+        {
+            var (id, description) = dto;
+            var command = new EditDescriptionCommand(id, description);
+            _productService.EditDescription(command);
+
+            return Ok();
+        }
+
         [HttpPut("{id}/name")]
         public IActionResult EditName([FromBody] EditNameDto dto)
         {

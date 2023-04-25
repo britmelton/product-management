@@ -11,6 +11,16 @@ public class ProductService : IProductService
         _repo = repo;
     }
 
+    public void EditDescription(EditDescriptionCommand args)
+    {
+        var (id, description) = args;
+
+        var product = _repo.Find(id);
+        product.EditDescription(description);
+
+        _repo.Update(product);
+    }
+
     public void EditName(EditNameCommand args)
     {
         var (id, name) = args;
