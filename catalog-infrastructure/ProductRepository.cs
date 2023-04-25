@@ -24,5 +24,15 @@ namespace catalog_infrastructure
             _context.Product.Add(dbProduct);
             _context.SaveChanges();
         }
+
+        public void Update(Product product)
+        {
+            ProductDto storedProduct = _context.Product.Find(product.Id);
+
+            storedProduct.Update(product);
+
+            _context.Product.Update(storedProduct);
+            _context.SaveChanges();
+        }
     }
 }

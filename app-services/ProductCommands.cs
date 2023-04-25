@@ -5,4 +5,9 @@
         string Description,
         string Sku
     );
+
+    public record EditNameCommand(
+        Guid Id,
+        string Name
+    );
 }

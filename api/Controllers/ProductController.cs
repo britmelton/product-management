@@ -18,14 +18,14 @@ namespace api.Controllers
             _productService = productService;
         }
 
-        [HttpPost]
-        public IActionResult RegisterProduct([FromBody] RegisterProductDto dto)
+        [HttpPut("{id}/name")]
+        public IActionResult EditName([FromBody] EditNameDto dto)
         {
-            var (name, description, sku) = dto;
-            var command = new RegisterProductCommand(name, description, sku);
-            var productId = _productService.Register(command);
+            var (id, name) = dto;
+            var command = new EditNameCommand(id, name);
+            _productService.EditName(command);
 
-            return CreatedAtRoute(nameof(Find), new { id = productId }, null);
+            return Ok();
         }
 
         [HttpGet("{id}", Name = "Find")]
@@ -34,6 +34,16 @@ namespace api.Controllers
             var product = _productRepo.Find(id);
             var productDto = new ProductDto(product.Name, product.Description, product.Sku);
             return productDto;
+        }
+
+        [HttpPost]
+        public IActionResult RegisterProduct([FromBody] RegisterProductDto dto)
+        {
+            var (name, description, sku) = dto;
+            var command = new RegisterProductCommand(name, description, sku);
+            var productId = _productService.Register(command);
+
+            return CreatedAtRoute(nameof(Find), new { id = productId }, null);
         }
     }
 }

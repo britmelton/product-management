@@ -10,6 +10,17 @@ public class ProductService : IProductService
     {
         _repo = repo;
     }
+
+    public void EditName(EditNameCommand args)
+    {
+        var (id, name) = args;
+
+        var product = _repo.Find(id);
+        product.EditName(name);
+
+        _repo.Update(product);
+    }
+
     public Guid Register(RegisterProductCommand args)
     {
         var (name, description, sku) = args;

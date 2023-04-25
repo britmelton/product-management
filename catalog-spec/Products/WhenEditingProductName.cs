@@ -3,14 +3,14 @@ using FluentAssertions;
 
 namespace catalog_spec.Products
 {
-    public class WhenEditingAProductName
+    public class WhenEditingProductName
     {
         private readonly Product _product;
         private readonly Sku _sku = new("abc123");
         private readonly string _name = "product";
         private readonly string _description = "product description";
 
-        public WhenEditingAProductName()
+        public WhenEditingProductName()
         {
             _product = new(_name, _description, _sku);
         }

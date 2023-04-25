@@ -17,7 +17,14 @@ namespace catalog_infrastructure
             Sku = product.Sku;
             Name = product.Name;
             Description = product.Description;
-            
+        }
+
+        public ProductDto Update(Product product)
+        {
+            Name = product.Name;
+            Description = product.Description;
+
+            return this;
         }
     }
 }
