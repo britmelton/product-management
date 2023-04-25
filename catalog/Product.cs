@@ -20,5 +20,11 @@
             Name = newName;
             return Name;
         }
+
+        public string EditDescription(string newDescription)
+        {
+            Description = newDescription;
+            return Description;
+        }
     }
 }
