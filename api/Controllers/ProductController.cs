@@ -26,6 +26,14 @@ namespace api.Controllers
             return Ok();
         }
 
+        [HttpPut("{id}/deactivate")]
+        public IActionResult Deactivate(Guid id)
+        {
+            _productService.Deactivate(id);
+
+            return Ok();
+        }
+
         [HttpPut("{id}/description")]
         public IActionResult EditDescription([FromBody] EditDescriptionDto dto)
         {
