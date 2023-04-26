@@ -16,19 +16,11 @@ namespace catalog_spec.Products
         }
 
         [Fact]
-        public void ThenIsActiveReturnsFalse()
+        public void ThenProductIsDeactivated()
         {
+            _product.Activate();
             _product.Deactivate();
-
-            _product.IsActive.Should().BeFalse();
-        }
-
-        [Fact]
-        public void ThenIsStagedReturnsFalse()
-        {
-            _product.Deactivate();
-
-            _product.IsStaged.Should().BeFalse();
+            _product.Status.Should().Be(ProductStatus.Deactivated);
         }
     }
 }

@@ -1,35 +1,46 @@
 ﻿namespace catalog
 {
-    public class Product
+    public partial class Product
     {
         public string Description { get; set; }
         public Guid Id { get; }
-        public bool IsActive { get; set; }
-        public bool IsStaged { get; set; }
         public string Name { get; set; }
         public Sku Sku { get; set; }
+        private State _state;
 
-        public Product(string description, string name, Sku sku, bool isActive = false, bool isStaged = true, Guid id = default)
+        private ProductStatus _status;
+
+        public ProductStatus Status
+        {
+            get => _status;
+            private set
+            {
+                _status = value;
+                _state = _states[_status](this);
+            }
+        }
+
+        private readonly Dictionary<ProductStatus, Func<Product, State>> _states = new()
+        {
+            { ProductStatus.Activated, x => new Activated(x) },
+            { ProductStatus.Deactivated, x => new Deactivated(x) },
+            { ProductStatus.Staged, x => new Staged(x) }
+        };
+
+        public Product(string description, string name, Sku sku, Guid id = default)
         {
             Description = description;
             Name = name;
             Sku = sku;
             Id = id == default ? Guid.NewGuid() : id;
-            IsActive = isActive;
-            IsStaged = isStaged;
+            Status = ProductStatus.Staged;
         }
 
-        public void Activate()
-        {
-            IsActive = true;
-            IsStaged = false;
-        }
+        public void Activate() => _state.Activate();
 
-        public void Deactivate()
-        {
-            IsActive = false;
-            IsStaged = false;
-        }
+        public void Deactivate() => _state.Deactivate();
+
+        public void Stage() => _state.Stage();
 
         public string EditName(string newName)
         {

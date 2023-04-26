@@ -22,15 +22,9 @@ namespace catalog_spec.Products
         }
 
         [Fact]
-        public void ThenIsActiveReturnsFalse()
+        public void ThenProductIsStaged()
         {
-            _product.IsActive.Should().BeFalse();
-        }
-
-        [Fact]
-        public void ThenIsStagedReturnsTrue()
-        {
-            _product.IsStaged.Should().BeTrue();
+            _product.Status.Should().Be(ProductStatus.Staged);
         }
 
         [Fact]
