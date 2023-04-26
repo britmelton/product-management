@@ -1,4 +1,5 @@
-﻿namespace api.DataContracts
+﻿using Microsoft.Identity.Client;
+namespace api.DataContracts
 {
     public record EditDescriptionDto(
         Guid Id,

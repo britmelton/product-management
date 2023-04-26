@@ -18,6 +18,14 @@ namespace api.Controllers
             _productService = productService;
         }
 
+        [HttpPut("{id}/activate")]
+        public IActionResult Activate(Guid id)
+        {
+            _productService.Activate(id);
+
+            return Ok();
+        }
+
         [HttpPut("{id}/description")]
         public IActionResult EditDescription([FromBody] EditDescriptionDto dto)
         {
@@ -39,11 +47,10 @@ namespace api.Controllers
         }
 
         [HttpGet("{id}", Name = "Find")]
-        public ActionResult<ProductDto> Find(Guid id)
+        public IActionResult Find(Guid id)
         {
-            var product = _productRepo.Find(id);
-            var productDto = new ProductDto(product.Description, product.Name, product.Sku);
-            return productDto;
+            ProductDto product = _productRepo.Find(id);
+            return Ok(product);
         }
 
         [HttpPost]

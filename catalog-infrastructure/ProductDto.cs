@@ -25,8 +25,10 @@ namespace catalog_infrastructure
 
         public ProductDto Update(Product product)
         {
-            Name = product.Name;
+            IsActive = product.IsActive;
+            IsStaged = product.IsStaged;
             Description = product.Description;
+            Name = product.Name;
 
             return this;
         }
