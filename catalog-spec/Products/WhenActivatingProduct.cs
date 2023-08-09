@@ -14,11 +14,19 @@ namespace catalog_spec.Products
         {
             _product = new(_description, _name, _sku);
         }
+
         [Fact]
         public void ThenProductIsActivated()
         {
             _product.Activate();
             _product.Status.Should().Be(ProductStatus.Activated);
+        }
+
+        [Fact]
+        public void ThenProductIsNotStaged()
+        {
+            _product.Activate();
+            _product.Status.Should().NotBe(ProductStatus.Staged);
         }
     }
 }

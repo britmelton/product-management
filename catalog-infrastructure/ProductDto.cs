@@ -5,8 +5,7 @@ namespace catalog_infrastructure
     public class ProductDto : Entity
     {
         public ProductDto()
-        {
-        }
+        {}
 
         public string Description { get; set; }
         public bool IsActive { get; set; }
@@ -17,16 +16,22 @@ namespace catalog_infrastructure
         public ProductDto(Product product) : base(product.Id)
         {
             Description = product.Description;
-            IsActive = product.IsActive;
-            IsStaged = product.IsStaged;
+            IsActive = product.Status.HasFlag(ProductStatus.Activated);
+            IsStaged = product.Status.HasFlag(ProductStatus.Staged);
             Name = product.Name;
             Sku = product.Sku;
         }
 
+        public static implicit operator Product(ProductDto source) =>
+            new(source.Description, source.Name, source.Sku, source.Id);
+
+        public static implicit operator ProductDto(Product source) =>
+            new(source);
+
         public ProductDto Update(Product product)
         {
-            IsActive = product.IsActive;
-            IsStaged = product.IsStaged;
+            IsActive = product.Status.HasFlag(ProductStatus.Activated);
+            IsStaged = product.Status.HasFlag(ProductStatus.Staged);
             Description = product.Description;
             Name = product.Name;
 

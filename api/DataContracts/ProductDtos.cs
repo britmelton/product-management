@@ -10,12 +10,13 @@ namespace api.DataContracts
         bool IsStaged
     )
     {
-        public static implicit operator ProductDto(Product source) => new ProductDto(source.Description, source.Name, source.Sku, source.IsActive, source.IsStaged);
+        public static implicit operator ProductDto(Product source) =>
+            new(source.Description, source.Name, source.Sku, source.Status.HasFlag(ProductStatus.Activated), source.Status.HasFlag(ProductStatus.Staged));
     }
 
     public record RegisterProductDto(
-        string Description,
-        string Name,
-        string Sku
-    );
+            string Description,
+            string Name,
+            string Sku
+        );
 }
