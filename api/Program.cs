@@ -1,5 +1,6 @@
 using app_services;
 using catalog;
+using catalog.infrastructure.read;
 using catalog_infrastructure;
 using Microsoft.EntityFrameworkCore;
 
@@ -18,6 +19,7 @@ builder.Services.AddDbContext<Context>(options => options.UseSqlServer(
 
 builder.Services.AddTransient<IProductRepository, ProductRepository>();
 builder.Services.AddTransient<IProductService, ProductService>();
+builder.Services.AddTransient<IProductReadService, ProductReadService>();
 
 var app = builder.Build();
 

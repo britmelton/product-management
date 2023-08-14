@@ -17,7 +17,11 @@ namespace api_spec
 
             var result = await HttpClient.PostAsJsonAsync("", dto);
 
-            var id = result.Headers.Location.AbsolutePath.Split('/')[^1];
+            var id = result.Headers.Location.AbsolutePath.Split('/')[^1]; 
+            
+            await HttpClient.PutAsJsonAsync($"{id}/activate", new object());
+
+            var activeProduct = await HttpClient.GetFromJsonAsync<ProductDto>(result.Headers.Location);
 
             await HttpClient.PutAsJsonAsync($"{id}/deactivate", new object());
 

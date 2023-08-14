@@ -1,9 +1,8 @@
 ﻿namespace catalog
 {
-    public partial class Product
+    public partial class Product : Entity
     {
         public string Description { get; set; }
-        public Guid Id { get; }
         public string Name { get; set; }
         public Sku Sku { get; set; }
         private State _state;
@@ -27,13 +26,13 @@
             { ProductStatus.Staged, x => new Staged(x) }
         };
 
-        public Product(string description, string name, Sku sku, Guid id = default)
+        public Product(string description, string name, Sku sku, ProductStatus status = ProductStatus.Staged, Guid id = default) : base(id)
         {
             Description = description;
             Name = name;
             Sku = sku;
-            Id = id == default ? Guid.NewGuid() : id;
-            Status = ProductStatus.Staged;
+            Status = status;
+            //Status = ProductStatus.Staged;
         }
 
         public void Activate() => _state.Activate();

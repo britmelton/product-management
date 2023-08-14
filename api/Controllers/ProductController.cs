@@ -1,6 +1,6 @@
 ﻿using api.DataContracts;
 using app_services;
-using catalog;
+using catalog.infrastructure.read;
 using Microsoft.AspNetCore.Mvc;
 
 namespace api.Controllers
@@ -9,13 +9,13 @@ namespace api.Controllers
     [ApiController]
     public class ProductController : ControllerBase
     {
-        private readonly IProductRepository _productRepo;
         private readonly IProductService _productService;
+        private readonly IProductReadService _productReadService;
 
-        public ProductController(IProductRepository productRepo, IProductService productService)
+        public ProductController(IProductService productService, IProductReadService productReadService)
         {
-            _productRepo = productRepo;
             _productService = productService;
+            _productReadService = productReadService;
         }
 
         [HttpPut("{id}/activate")]
@@ -57,7 +57,7 @@ namespace api.Controllers
         [HttpGet("{id}", Name = "Find")]
         public IActionResult Find(Guid id)
         {
-            ProductDto product = _productRepo.Find(id);
+            catalog.infrastructure.read.ProductDto product = _productReadService.Find(id);
             return Ok(product);
         }
 

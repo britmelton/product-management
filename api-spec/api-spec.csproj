@@ -27,7 +27,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\api\api.csproj" />
-    <ProjectReference Include="..\catalog-infrastructure\catalog-infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
