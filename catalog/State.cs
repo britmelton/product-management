@@ -1,4 +1,4 @@
-﻿namespace catalog
+﻿namespace Catalog
 {
     public partial class Product
     {
@@ -19,16 +19,14 @@
         {
             public Activated(Product product) : base(product) { }
 
-            public override void Activate()
-            { }
+            public override void Activate() { }
 
             public override void Deactivate()
             {
                 Product.Status = ProductStatus.Deactivated;
             }
 
-            public override void Stage()
-            { }
+            public override void Stage() { }
         }
 
         public class Deactivated : State
@@ -40,11 +38,9 @@
                 Product.Status = ProductStatus.Activated;
             }
 
-            public override void Deactivate()
-            { }
+            public override void Deactivate() { }
 
-            public override void Stage()
-            { }
+            public override void Stage() { }
         }
 
         public class Staged : State
@@ -56,11 +52,9 @@
                 Product.Status = ProductStatus.Activated;
             }
 
-            public override void Deactivate()
-            { }
+            public override void Deactivate() { }
 
-            public override void Stage()
-            { }
+            public override void Stage() { }
         }
     }
 }

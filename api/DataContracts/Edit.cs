@@ -1,4 +1,4 @@
-﻿namespace api.DataContracts
+﻿namespace Api.DataContracts
 {
     public record EditDescriptionDto(
         Guid Id,

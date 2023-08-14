@@ -1,6 +1,4 @@
-﻿using catalog;
-
-namespace catalog_infrastructure
+﻿namespace Catalog.Infrastructure.Write
 {
     public class ProductRepository : IProductRepository
     {
@@ -11,16 +9,16 @@ namespace catalog_infrastructure
             this._context = context;
         }
 
-        public catalog.Product Find(Guid id) => _context.Product.Find(id);
+        public Catalog.Product Find(Guid id) => _context.Product.Find(id);
 
-        public void Register(catalog.Product product)
+        public void Register(Catalog.Product product)
         {
             var dbProduct = new Product(product);
             _context.Product.Add(dbProduct);
             _context.SaveChanges();
         }
 
-        public void Update(catalog.Product product)
+        public void Update(Catalog.Product product)
         {
             var storedProduct = _context.Product.Find(product.Id);
 

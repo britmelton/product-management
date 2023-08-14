@@ -1,7 +1,7 @@
-using app_services;
-using catalog;
-using catalog.infrastructure.read;
-using catalog_infrastructure;
+using App.Services;
+using Catalog;
+using Catalog.Infrastructure.Read;
+using Catalog.Infrastructure.Write;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);

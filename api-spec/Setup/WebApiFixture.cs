@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc.Testing;
-using Microsoft.VisualStudio.TestPlatform.TestHost;
 
-namespace api_spec.Setup
+namespace Api.Spec.Setup
 {
     public abstract class WebApiFixture : IClassFixture<IntegrationTestingFactory<Program>>
     {

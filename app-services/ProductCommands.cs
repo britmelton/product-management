@@ -1,4 +1,4 @@
-﻿namespace app_services
+﻿namespace App.Services
 {
     public record EditDescriptionCommand(
         Guid Id,

@@ -1,4 +1,4 @@
-﻿namespace catalog
+﻿namespace Catalog
 {
     public abstract class TinyType<T> : ValueObject where T : notnull
     {

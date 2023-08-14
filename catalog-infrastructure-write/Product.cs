@@ -1,13 +1,11 @@
-﻿using catalog;
-
-namespace catalog_infrastructure
+﻿namespace Catalog.Infrastructure.Write
 {
     public class Product : Entity
     {
         public Product()
         { }
 
-        public Product(catalog.Product product) : base(product.Id)
+        public Product(Catalog.Product product) : base(product.Id)
         {
             Description = product.Description;
             IsActive = product.Status.HasFlag(ProductStatus.Activated);
@@ -22,7 +20,7 @@ namespace catalog_infrastructure
         public string Name { get; set; }
         public string Sku { get; set; }
 
-        public static implicit operator catalog.Product(Product source)
+        public static implicit operator Catalog.Product(Product source)
         {
             var status = ProductStatus.Deactivated;
 
@@ -34,10 +32,10 @@ namespace catalog_infrastructure
             return new(source.Description, source.Name, source.Sku, status, source.Id);
         }
 
-        public static implicit operator Product(catalog.Product source) =>
+        public static implicit operator Product(Catalog.Product source) =>
             new(source);
 
-        public Product Update(catalog.Product product)
+        public Product Update(Catalog.Product product)
         {
             IsActive = product.Status.HasFlag(ProductStatus.Activated);
             IsStaged = product.Status.HasFlag(ProductStatus.Staged);

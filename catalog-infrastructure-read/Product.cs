@@ -1,11 +1,12 @@
-﻿namespace catalog.infrastructure.read;
-
-public record Product
+﻿namespace Catalog.Infrastructure.Read
 {
-    public string Description { get; init; }
-    public Guid Id { get; init; }
-    public string Name { get; init; }
-    public string Sku { get; init; }
-    public bool IsActive { get; init; }
-    public bool IsStaged { get; init; }
+    public record Product
+    {
+        public string Description { get; init; }
+        public Guid Id { get; init; }
+        public string Name { get; init; }
+        public string Sku { get; init; }
+        public bool IsActive { get; init; }
+        public bool IsStaged { get; init; }
+    }
 }

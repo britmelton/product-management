@@ -1,9 +1,9 @@
-﻿using api.DataContracts;
-using app_services;
-using catalog.infrastructure.read;
+﻿using Api.DataContracts;
+using App.Services;
+using Catalog.Infrastructure.Read;
 using Microsoft.AspNetCore.Mvc;
 
-namespace api.Controllers
+namespace Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -57,7 +57,7 @@ namespace api.Controllers
         [HttpGet("{id}", Name = "Find")]
         public IActionResult Find(Guid id)
         {
-            catalog.infrastructure.read.Product product = _productReadService.Find(id);
+            var product = _productReadService.Find(id);
             return Ok(product);
         }
 

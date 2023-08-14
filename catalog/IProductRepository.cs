@@ -1,4 +1,4 @@
-﻿namespace catalog
+﻿namespace Catalog
 {
     public interface IProductRepository
     {

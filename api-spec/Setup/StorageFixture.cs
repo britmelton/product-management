@@ -1,9 +1,9 @@
-﻿using catalog_infrastructure;
+﻿using Catalog.Infrastructure.Write;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using System.Data.Common;
 
-namespace api_spec.Setup
+namespace Api.Spec.Setup
 {
     public class StorageFixture : IDisposable
     {

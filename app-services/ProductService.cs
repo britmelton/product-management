@@ -1,57 +1,59 @@
-﻿using catalog;
+﻿using Catalog;
 
-namespace app_services;
-public class ProductService : IProductService
+namespace App.Services
 {
-    private readonly IProductRepository _repo;
-
-    public ProductService(IProductRepository repo)
+    public class ProductService : IProductService
     {
-        _repo = repo;
-    }
+        private readonly IProductRepository _repo;
 
-    public void Activate(Guid id)
-    {
-        var product = _repo.Find(id);
-        product.Activate();
+        public ProductService(IProductRepository repo)
+        {
+            _repo = repo;
+        }
 
-        _repo.Update(product);
-    }
+        public void Activate(Guid id)
+        {
+            var product = _repo.Find(id);
+            product.Activate();
 
-    public void Deactivate(Guid id)
-    {
-        var product = _repo.Find(id);
-        product.Deactivate();
+            _repo.Update(product);
+        }
 
-        _repo.Update(product);
-    }
+        public void Deactivate(Guid id)
+        {
+            var product = _repo.Find(id);
+            product.Deactivate();
 
-    public void EditDescription(EditDescriptionCommand args)
-    {
-        var (id, description) = args;
+            _repo.Update(product);
+        }
 
-        var product = _repo.Find(id);
-        product.EditDescription(description);
+        public void EditDescription(EditDescriptionCommand args)
+        {
+            var (id, description) = args;
 
-        _repo.Update(product);
-    }
+            var product = _repo.Find(id);
+            product.EditDescription(description);
 
-    public void EditName(EditNameCommand args)
-    {
-        var (id, name) = args;
+            _repo.Update(product);
+        }
 
-        var product = _repo.Find(id);
-        product.EditName(name);
+        public void EditName(EditNameCommand args)
+        {
+            var (id, name) = args;
 
-        _repo.Update(product);
-    }
+            var product = _repo.Find(id);
+            product.EditName(name);
 
-    public Guid Register(RegisterProductCommand args)
-    {
-        var (name, description, sku) = args;
-        var product = new Product(name, description, sku);
-        _repo.Register(product);
+            _repo.Update(product);
+        }
 
-        return product.Id;
+        public Guid Register(RegisterProductCommand args)
+        {
+            var (name, description, sku) = args;
+            var product = new Product(name, description, sku);
+            _repo.Register(product);
+
+            return product.Id;
+        }
     }
 }

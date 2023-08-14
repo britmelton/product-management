@@ -1,7 +1,6 @@
-﻿using catalog;
-using FluentAssertions;
+﻿using FluentAssertions;
 
-namespace catalog_spec.TinyTypes
+namespace Catalog.Spec.TinyTypes
 {
     public class SkuSpec
     {

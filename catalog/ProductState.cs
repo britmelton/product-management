@@ -1,4 +1,4 @@
-﻿namespace catalog
+﻿namespace Catalog
 {
     [Flags]
     public enum ProductStatus

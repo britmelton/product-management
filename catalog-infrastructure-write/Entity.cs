@@ -1,4 +1,4 @@
-﻿namespace catalog_infrastructure
+﻿namespace Catalog.Infrastructure.Write
 {
     public abstract class Entity
     {

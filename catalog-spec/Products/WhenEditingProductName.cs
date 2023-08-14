@@ -1,7 +1,6 @@
-﻿using catalog;
-using FluentAssertions;
+﻿using FluentAssertions;
 
-namespace catalog_spec.Products
+namespace Catalog.Spec.Products
 {
     public class WhenEditingProductName
     {

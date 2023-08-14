@@ -1,9 +1,9 @@
-﻿using api.DataContracts;
-using api_spec.Setup;
+﻿using Api.DataContracts;
+using Api.Spec.Setup;
 using System.Net.Http.Json;
 using FluentAssertions;
 
-namespace api_spec
+namespace Api.Spec
 {
     public class WhenRegisteringAProduct : WebApiFixture
     {

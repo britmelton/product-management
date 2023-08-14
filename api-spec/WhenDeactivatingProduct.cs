@@ -1,9 +1,9 @@
-﻿using api.DataContracts;
-using api_spec.Setup;
+﻿using Api.DataContracts;
+using Api.Spec.Setup;
 using FluentAssertions;
 using System.Net.Http.Json;
 
-namespace api_spec
+namespace Api.Spec
 {
     public class WhenDeactivatingProduct : WebApiFixture
     {

@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
+	  <RootNamespace>Api</RootNamespace>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
@@ -17,7 +18,7 @@
   <ItemGroup>
     <ProjectReference Include="..\app-services\app-services.csproj" />
     <ProjectReference Include="..\catalog-infrastructure-read\catalog-infrastructure-read.csproj" />
-    <ProjectReference Include="..\catalog-infrastructure\catalog-infrastructure-write.csproj" />
+    <ProjectReference Include="..\catalog-infrastructure-write\catalog-infrastructure-write.csproj" />
   </ItemGroup>
 
 </Project>

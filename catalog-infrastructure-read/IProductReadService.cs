@@ -1,4 +1,4 @@
-﻿namespace catalog.infrastructure.read
+﻿namespace Catalog.Infrastructure.Read
 {
     public interface IProductReadService
     {

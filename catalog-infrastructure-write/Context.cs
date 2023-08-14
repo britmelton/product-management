@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace catalog_infrastructure
+namespace Catalog.Infrastructure.Write
 {
     public class Context : DbContext
     {

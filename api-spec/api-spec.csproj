@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
-    <RootNamespace>api_spec</RootNamespace>
+    <RootNamespace>Api.Spec</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
 
@@ -27,6 +27,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\api\api.csproj" />
+    <ProjectReference Include="..\catalog-infrastructure-write\catalog-infrastructure-write.csproj" />
   </ItemGroup>
 
 </Project>

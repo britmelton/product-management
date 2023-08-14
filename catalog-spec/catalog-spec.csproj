@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
-    <RootNamespace>catalog_spec</RootNamespace>
+    <RootNamespace>Catalog.Spec</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
 
@@ -24,7 +24,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\catalog-infrastructure\catalog-infrastructure-write.csproj" />
     <ProjectReference Include="..\catalog\catalog.csproj" />
   </ItemGroup>
 

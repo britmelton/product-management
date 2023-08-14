@@ -1,6 +1,6 @@
 ﻿using System.Text.RegularExpressions;
 
-namespace catalog
+namespace Catalog
 {
     public class Sku : TinyType<string>
     {

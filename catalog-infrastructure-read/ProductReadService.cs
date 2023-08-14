@@ -1,7 +1,7 @@
 ﻿using System.Data.SqlClient;
 using Dapper;
 
-namespace catalog.infrastructure.read
+namespace Catalog.Infrastructure.Read
 {
     public class ProductReadService : IProductReadService
     {
