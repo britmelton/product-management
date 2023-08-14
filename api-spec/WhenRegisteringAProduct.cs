@@ -13,11 +13,14 @@ namespace api_spec
         [Fact]
         public async void ThenProductIsRegistered()
         {
-            var dto = new RegisterProductDto("description", "name", "abc123");
+            var dto = new RegisterProduct("description", "name", "abc123");
             var result = await HttpClient.PostAsJsonAsync("", dto);
 
-            var product = await HttpClient.GetFromJsonAsync<ProductDto>(result.Headers.Location);
+            var product = await HttpClient.GetFromJsonAsync<ProductDetails>(result.Headers.Location);
+
             product.Should().NotBeNull();
+            product.IsStaged.Should().BeTrue();
+            product.IsActive.Should().BeFalse();
         }
     }
 }

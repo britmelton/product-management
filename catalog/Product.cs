@@ -2,13 +2,19 @@
 {
     public partial class Product : Entity
     {
+        public Product(string description, string name, Sku sku, ProductStatus status = ProductStatus.Staged, Guid id = default) : base(id)
+        {
+            Description = description;
+            Name = name;
+            Sku = sku;
+            Status = status;
+        }
+
         public string Description { get; set; }
         public string Name { get; set; }
         public Sku Sku { get; set; }
         private State _state;
-
         private ProductStatus _status;
-
         public ProductStatus Status
         {
             get => _status;
@@ -25,15 +31,6 @@
             { ProductStatus.Deactivated, x => new Deactivated(x) },
             { ProductStatus.Staged, x => new Staged(x) }
         };
-
-        public Product(string description, string name, Sku sku, ProductStatus status = ProductStatus.Staged, Guid id = default) : base(id)
-        {
-            Description = description;
-            Name = name;
-            Sku = sku;
-            Status = status;
-            //Status = ProductStatus.Staged;
-        }
 
         public void Activate() => _state.Activate();
 

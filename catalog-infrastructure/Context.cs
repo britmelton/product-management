@@ -8,6 +8,6 @@ namespace catalog_infrastructure
         {
         }
 
-        public DbSet<ProductDto> Product { get; set; }
+        public DbSet<Product> Product { get; set; }
     }
 }

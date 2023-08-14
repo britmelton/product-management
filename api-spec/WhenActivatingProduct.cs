@@ -13,7 +13,7 @@ namespace api_spec
         [Fact]
         public async void ThenIsActiveReturnsTrue_AndIsStagedReturnsFalse()
         {
-            var dto = new RegisterProductDto("product", "description", "abc123");
+            var dto = new RegisterProduct("product", "description", "abc123");
 
             var result = await HttpClient.PostAsJsonAsync("", dto);
 
@@ -21,7 +21,7 @@ namespace api_spec
 
             await HttpClient.PutAsJsonAsync($"{id}/activate", new object());
 
-            var product = await HttpClient.GetFromJsonAsync<ProductDto>(result.Headers.Location);
+            var product = await HttpClient.GetFromJsonAsync<ProductDetails>(result.Headers.Location);
 
             product.IsActive.Should().BeTrue();
             product.IsStaged.Should().BeFalse();

@@ -13,7 +13,7 @@ namespace api_spec
         [Fact]
         public async void ThenDescriptionIsNewDescription()
         {
-            var dto = new RegisterProductDto("product", "description", "abc123");
+            var dto = new RegisterProduct("product", "description", "abc123");
 
             var result = await HttpClient.PostAsJsonAsync("", dto);
 
@@ -23,10 +23,9 @@ namespace api_spec
 
             await HttpClient.PutAsJsonAsync($"{id}/description", editDto);
 
-            var product = await HttpClient.GetFromJsonAsync<ProductDto>(result.Headers.Location);
+            var product = await HttpClient.GetFromJsonAsync<ProductDetails>(result.Headers.Location);
 
             product.Description.Should().Be(editDto.Description);
-
         }
     }
 }

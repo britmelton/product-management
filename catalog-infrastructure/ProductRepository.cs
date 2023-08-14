@@ -11,23 +11,18 @@ namespace catalog_infrastructure
             this._context = context;
         }
 
-        public Product Find(Guid id) => _context.Product.Find(id);
-        //{
-        //    var dbProduct = _context.Product.Find(id);
-        //    var product = new Product(dbProduct.Description, dbProduct.Name, dbProduct.Sku, dbProduct.IsActive, dbProduct.IsStaged, dbProduct.Id);
-        //    return product;
-        //}
+        public catalog.Product Find(Guid id) => _context.Product.Find(id);
 
-        public void Register(Product product)
+        public void Register(catalog.Product product)
         {
-            var dbProduct = new ProductDto(product);
+            var dbProduct = new Product(product);
             _context.Product.Add(dbProduct);
             _context.SaveChanges();
         }
 
-        public void Update(Product product)
+        public void Update(catalog.Product product)
         {
-            ProductDto storedProduct = _context.Product.Find(product.Id);
+            var storedProduct = _context.Product.Find(product.Id);
 
             storedProduct.Update(product);
 

@@ -1,8 +1,6 @@
-﻿using catalog;
-
-namespace api.DataContracts
+﻿namespace api.DataContracts
 {
-    public record ProductDto(
+    public record ProductDetails(
         string Description,
         string Name,
         string Sku,
@@ -10,11 +8,11 @@ namespace api.DataContracts
         bool IsStaged
     )
     {
-        public static implicit operator ProductDto(catalog.infrastructure.read.ProductDto source) =>
+        public static implicit operator ProductDetails(catalog.infrastructure.read.Product source) =>
             new(source.Description, source.Name, source.Sku, source.IsActive, source.IsStaged);
     }
 
-    public record RegisterProductDto(
+    public record RegisterProduct(
             string Description,
             string Name,
             string Sku

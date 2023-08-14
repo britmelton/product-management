@@ -57,12 +57,12 @@ namespace api.Controllers
         [HttpGet("{id}", Name = "Find")]
         public IActionResult Find(Guid id)
         {
-            catalog.infrastructure.read.ProductDto product = _productReadService.Find(id);
+            catalog.infrastructure.read.Product product = _productReadService.Find(id);
             return Ok(product);
         }
 
         [HttpPost]
-        public IActionResult RegisterProduct([FromBody] RegisterProductDto dto)
+        public IActionResult RegisterProduct([FromBody] RegisterProduct dto)
         {
             var (name, description, sku) = dto;
             var command = new RegisterProductCommand(description, name, sku);

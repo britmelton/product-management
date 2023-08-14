@@ -2,18 +2,12 @@
 
 namespace catalog_infrastructure
 {
-    public class ProductDto : Entity
+    public class Product : Entity
     {
-        public ProductDto()
+        public Product()
         { }
 
-        public string Description { get; set; }
-        public bool IsActive { get; set; }
-        public bool IsStaged { get; set; }
-        public string Name { get; set; }
-        public string Sku { get; set; }
-
-        public ProductDto(Product product) : base(product.Id)
+        public Product(catalog.Product product) : base(product.Id)
         {
             Description = product.Description;
             IsActive = product.Status.HasFlag(ProductStatus.Activated);
@@ -22,7 +16,13 @@ namespace catalog_infrastructure
             Sku = product.Sku;
         }
 
-        public static implicit operator Product(ProductDto source)
+        public string Description { get; set; }
+        public bool IsActive { get; set; }
+        public bool IsStaged { get; set; }
+        public string Name { get; set; }
+        public string Sku { get; set; }
+
+        public static implicit operator catalog.Product(Product source)
         {
             var status = ProductStatus.Deactivated;
 
@@ -34,10 +34,10 @@ namespace catalog_infrastructure
             return new(source.Description, source.Name, source.Sku, status, source.Id);
         }
 
-        public static implicit operator ProductDto(Product source) =>
+        public static implicit operator Product(catalog.Product source) =>
             new(source);
 
-        public ProductDto Update(Product product)
+        public Product Update(catalog.Product product)
         {
             IsActive = product.Status.HasFlag(ProductStatus.Activated);
             IsStaged = product.Status.HasFlag(ProductStatus.Staged);

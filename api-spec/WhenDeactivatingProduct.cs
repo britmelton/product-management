@@ -7,13 +7,13 @@ namespace api_spec
 {
     public class WhenDeactivatingProduct : WebApiFixture
     {
-        public WhenDeactivatingProduct(IntegrationTestingFactory<Program> factory, string uri = default)
-    : base(factory, "product") { }
+        public WhenDeactivatingProduct(IntegrationTestingFactory<Program> factory, string uri = default) 
+            : base(factory, "product") { }
 
         [Fact]
         public async void ThenIsActiveReturnsFalse_AndIsStagedReturnsFalse()
         {
-            var dto = new RegisterProductDto("product", "description", "abc123");
+            var dto = new RegisterProduct("product", "description", "abc123");
 
             var result = await HttpClient.PostAsJsonAsync("", dto);
 
@@ -21,11 +21,9 @@ namespace api_spec
             
             await HttpClient.PutAsJsonAsync($"{id}/activate", new object());
 
-            var activeProduct = await HttpClient.GetFromJsonAsync<ProductDto>(result.Headers.Location);
-
             await HttpClient.PutAsJsonAsync($"{id}/deactivate", new object());
 
-            var product = await HttpClient.GetFromJsonAsync<ProductDto>(result.Headers.Location);
+            var product = await HttpClient.GetFromJsonAsync<ProductDetails>(result.Headers.Location);
 
             product.IsActive.Should().BeFalse();
             product.IsStaged.Should().BeFalse();

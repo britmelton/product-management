@@ -2,12 +2,12 @@
 {
     public abstract class TinyType<T> : ValueObject where T : notnull
     {
-        public T Value { get; }
-
         protected TinyType(T value)
         {
             Value = value;
         }
+
+        public T Value { get; }
 
         public static implicit operator T(TinyType<T> source) => source.Value;
 

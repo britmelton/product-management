@@ -1,5 +1,4 @@
-﻿using Microsoft.Identity.Client;
-namespace api.DataContracts
+﻿namespace api.DataContracts
 {
     public record EditDescriptionDto(
         Guid Id,
