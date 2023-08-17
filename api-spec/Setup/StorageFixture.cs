@@ -1,4 +1,4 @@
-﻿using Catalog.Infrastructure.Write;
+﻿using Infrastructure.Write;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using System.Data.Common;

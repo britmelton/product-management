@@ -1,4 +1,6 @@
-﻿namespace Sales.Infrastructure.Write
+﻿using Microsoft.EntityFrameworkCore;
+
+namespace Sales.Infrastructure.Write
 {
     public class Product : Entity
     {
@@ -10,7 +12,7 @@
             Price = product.Price;
             Sku = product.Sku;
         }
-
+        [Precision(6, 2)]
         public decimal Price { get; set; }
         public string Sku { get;  }
 

@@ -11,7 +11,7 @@ namespace Api.Spec
             : base(factory, "product") { }
 
         [Fact]
-        public async void ThenProductIsRegistered()
+        public async void ThenPriceIsSet()
         {
             var pdto = new RegisterProduct("product", "description", "abc123");
             var newProduct = await HttpClient.PostAsJsonAsync("", pdto);
