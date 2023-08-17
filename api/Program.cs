@@ -16,13 +16,13 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-//builder.Services.AddDbContext<Catalog.Infrastructure.Write.Context>(options => options.UseSqlServer(
-//    builder.Configuration.GetConnectionString("SqlServer")
-//));
+builder.Services.AddDbContext<Catalog.Infrastructure.Write.Context>(options => options.UseSqlServer(
+    builder.Configuration.GetConnectionString("SqlServer")
+));
 
-//builder.Services.AddDbContext<Sales.Infrastructure.Write.Context>(options => options.UseSqlServer(
-//    builder.Configuration.GetConnectionString("SqlServer")
-//));
+builder.Services.AddDbContext<Sales.Infrastructure.Write.Context>(options => options.UseSqlServer(
+    builder.Configuration.GetConnectionString("SqlServer")
+));
 
 builder.Services.AddDbContext<Infrastructure.Write.Context>(options => options.UseSqlServer(
     builder.Configuration.GetConnectionString("SqlServer")
