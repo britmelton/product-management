@@ -3,7 +3,7 @@ using Dapper;
 
 namespace Catalog.Infrastructure.Read
 {
-    public class ProductReadService : IProductReadService
+    public class CatalogReadService : ICatalogReadService
     {
         public Product Find(Guid id)
         {

@@ -1,6 +1,6 @@
 ﻿namespace App.Services
 {
-    public interface IProductService
+    public interface ICatalogProductService
     {
         public void Activate(Guid id);
         public void Deactivate(Guid id);

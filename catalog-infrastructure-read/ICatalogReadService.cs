@@ -1,6 +1,6 @@
 ﻿namespace Catalog.Infrastructure.Read
 {
-    public interface IProductReadService
+    public interface ICatalogReadService
     {
         public Product Find(Guid id);
     }

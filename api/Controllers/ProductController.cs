@@ -2,6 +2,7 @@
 using App.Services;
 using Catalog.Infrastructure.Read;
 using Microsoft.AspNetCore.Mvc;
+using Sales.Infrastructure.Read;
 
 namespace Api.Controllers
 {
@@ -9,19 +10,22 @@ namespace Api.Controllers
     [ApiController]
     public class ProductController : ControllerBase
     {
-        private readonly IProductService _productService;
-        private readonly IProductReadService _productReadService;
+        private readonly ICatalogProductService _catalogProductService;
+        private readonly ISalesProductService _salesProductService;
+        private readonly ICatalogReadService _catalogReadService;
+        private readonly ISalesReadService _salesReadService;
 
-        public ProductController(IProductService productService, IProductReadService productReadService)
+        public ProductController(ICatalogProductService catalogProductService, ICatalogReadService catalogReadService, ISalesProductService salesProductService, ISalesReadService salesReadService
+        )
         {
-            _productService = productService;
-            _productReadService = productReadService;
+            _catalogProductService = catalogProductService;
+            _catalogReadService = catalogReadService;
         }
 
         [HttpPut("{id}/activate")]
         public IActionResult Activate(Guid id)
         {
-            _productService.Activate(id);
+            _catalogProductService.Activate(id);
 
             return Ok();
         }
@@ -29,7 +33,7 @@ namespace Api.Controllers
         [HttpPut("{id}/deactivate")]
         public IActionResult Deactivate(Guid id)
         {
-            _productService.Deactivate(id);
+            _catalogProductService.Deactivate(id);
 
             return Ok();
         }
@@ -39,7 +43,7 @@ namespace Api.Controllers
         {
             var (id, description) = dto;
             var command = new EditDescriptionCommand(id, description);
-            _productService.EditDescription(command);
+            _catalogProductService.EditDescription(command);
 
             return Ok();
         }
@@ -49,7 +53,7 @@ namespace Api.Controllers
         {
             var (id, name) = dto;
             var command = new EditNameCommand(id, name);
-            _productService.EditName(command);
+            _catalogProductService.EditName(command);
 
             return Ok();
         }
@@ -57,7 +61,7 @@ namespace Api.Controllers
         [HttpGet("{id}", Name = "Find")]
         public IActionResult Find(Guid id)
         {
-            var product = _productReadService.Find(id);
+            var product = _catalogReadService.Find(id);
             return Ok(product);
         }
 
@@ -66,9 +70,20 @@ namespace Api.Controllers
         {
             var (name, description, sku) = dto;
             var command = new RegisterProductCommand(description, name, sku);
-            var productId = _productService.Register(command);
+            var productId = _catalogProductService.Register(command);
 
             return CreatedAtRoute(nameof(Find), new { id = productId }, null);
+        }
+
+        [HttpPut("{id}/price")]
+        public IActionResult SetPrice([FromBody] SetProductPrice dto)
+        {
+            var (id, price) = dto;
+            var command = new ProductPriceCommand(id, price);
+
+            _salesProductService.SetPrice(command);
+
+            return Ok();
         }
     }
 }

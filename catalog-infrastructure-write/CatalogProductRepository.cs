@@ -1,10 +1,10 @@
 ﻿namespace Catalog.Infrastructure.Write
 {
-    public class ProductRepository : IProductRepository
+    public class CatalogProductRepository : ICatalogProductRepository
     {
         private readonly Context _context;
 
-        public ProductRepository(Context context)
+        public CatalogProductRepository(Context context)
         {
             this._context = context;
         }

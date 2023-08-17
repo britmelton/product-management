@@ -19,6 +19,8 @@
     <ProjectReference Include="..\app-services\app-services.csproj" />
     <ProjectReference Include="..\catalog-infrastructure-read\catalog-infrastructure-read.csproj" />
     <ProjectReference Include="..\catalog-infrastructure-write\catalog-infrastructure-write.csproj" />
+    <ProjectReference Include="..\sales-infrastructure-read\sales-infrastructure-read.csproj" />
+    <ProjectReference Include="..\sales-infrastructure-write\sales-infrastructure-write.csproj" />
   </ItemGroup>
 
 </Project>

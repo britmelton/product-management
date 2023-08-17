@@ -15,4 +15,9 @@
         string Name,
         string Sku
     );
+
+    public record ProductPriceCommand(
+        Guid Id,
+        decimal Price
+    );
 }

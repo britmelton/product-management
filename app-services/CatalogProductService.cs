@@ -2,11 +2,11 @@
 
 namespace App.Services
 {
-    public class ProductService : IProductService
+    public class CatalogProductService : ICatalogProductService
     {
-        private readonly IProductRepository _repo;
+        private readonly ICatalogProductRepository _repo;
 
-        public ProductService(IProductRepository repo)
+        public CatalogProductService(ICatalogProductRepository repo)
         {
             _repo = repo;
         }
@@ -50,7 +50,7 @@ namespace App.Services
         public Guid Register(RegisterProductCommand args)
         {
             var (name, description, sku) = args;
-            var product = new Product(name, description, sku);
+            var product = new Catalog.Product(name, description, sku);
             _repo.Register(product);
 
             return product.Id;
