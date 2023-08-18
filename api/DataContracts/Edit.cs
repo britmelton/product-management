@@ -9,9 +9,4 @@
         Guid Id,
         string Name
     );
-
-    public record SetProductPrice(
-        Guid Id,
-        decimal Price
-    );
 }

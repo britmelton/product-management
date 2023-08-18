@@ -17,4 +17,14 @@
             string Name,
             string Sku
         );
+
+    public record ProductPrice(
+        Guid Id,
+        decimal Price,
+        string Sku
+    )
+    {
+        public static implicit operator ProductPrice(Sales.Infrastructure.Read.Product source) =>
+            new(source.Id, source.Price.Value, source.Sku);
+    }
 }

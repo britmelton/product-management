@@ -2,6 +2,6 @@
 {
     public interface ISalesProductService
     {
-        public void SetPrice(ProductPriceCommand args);
+        public void SetPrice(SetPriceCommand args);
     }
 }

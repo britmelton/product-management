@@ -14,16 +14,13 @@ namespace Api.Spec
         public async void ThenIsActiveReturnsFalse_AndIsStagedReturnsFalse()
         {
             var dto = new RegisterProduct("product", "description", "abc123");
-
             var result = await HttpClient.PostAsJsonAsync("", dto);
 
-            var id = result.Headers.Location.AbsolutePath.Split('/')[^1]; 
-            
+            var id = result.Headers.Location.AbsolutePath.Split('/')[^1];
             await HttpClient.PutAsJsonAsync($"{id}/activate", new object());
-
             await HttpClient.PutAsJsonAsync($"{id}/deactivate", new object());
 
-            var product = await HttpClient.GetFromJsonAsync<ProductDetails>(result.Headers.Location);
+            var product = await HttpClient.GetFromJsonAsync<ProductDetails>($"catalog/{id}");
 
             product.IsActive.Should().BeFalse();
             product.IsStaged.Should().BeFalse();

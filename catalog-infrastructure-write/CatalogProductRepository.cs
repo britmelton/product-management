@@ -17,7 +17,7 @@
             _context.Product.Add(dbProduct);
             _context.SaveChanges();
         }
-
+         
         public void Update(Catalog.Product product)
         {
             var storedProduct = _context.Product.Find(product.Id);

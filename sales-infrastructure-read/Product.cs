@@ -3,7 +3,7 @@
     public class Product
     {
         public Guid Id { get; }
-        public decimal Price { get; set; }
+        public decimal? Price { get; init; }
         public string Sku { get; }
     }
 }

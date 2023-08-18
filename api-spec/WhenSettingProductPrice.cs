@@ -13,15 +13,16 @@ namespace Api.Spec
         [Fact]
         public async void ThenPriceIsSet()
         {
-            var pdto = new RegisterProduct("product", "description", "abc123");
-            var newProduct = await HttpClient.PostAsJsonAsync("", pdto);
+            var sku = "abc123";
+            var createProduct = new RegisterProduct("product", "description", sku);
+            var newProduct = await HttpClient.PostAsJsonAsync("", createProduct);
             var id = newProduct.Headers.Location.AbsolutePath.Split('/')[^1];
 
             var price = 28.25m;
-            var dto = new SetProductPrice(Guid.Parse(id), price);
-            var result = await HttpClient.PutAsJsonAsync($"{id}/price", dto);
+            var dto = new ProductPrice(Guid.Parse(id), price, sku);
+            await HttpClient.PutAsJsonAsync($"{id}/price", dto);
 
-            var product = await HttpClient.GetFromJsonAsync<SetProductPrice>(result.Headers.Location);
+            var product = await HttpClient.GetFromJsonAsync<ProductPrice>($"sales/{id}");
 
             product.Should().NotBeNull();
             product.Price.Should().Be(price);

@@ -2,9 +2,9 @@
 {
     public class Product : Entity
     {
-        public Product(decimal price, string sku, Guid id = default) : base(id)
+        public Product(decimal? price, string sku, Guid id = default) : base(id)
         {
-            Price = price;
+            Price = price ?? 0;
             Sku = sku;
         }
 

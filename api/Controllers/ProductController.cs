@@ -15,18 +15,18 @@ namespace Api.Controllers
         private readonly ICatalogReadService _catalogReadService;
         private readonly ISalesReadService _salesReadService;
 
-        public ProductController(ICatalogProductService catalogProductService, ICatalogReadService catalogReadService, ISalesProductService salesProductService, ISalesReadService salesReadService
-        )
+        public ProductController(ICatalogProductService catalogProductService, ICatalogReadService catalogReadService, ISalesProductService salesProductService, ISalesReadService salesReadService)
         {
             _catalogProductService = catalogProductService;
             _catalogReadService = catalogReadService;
+            _salesProductService = salesProductService;
+            _salesReadService = salesReadService;
         }
 
         [HttpPut("{id}/activate")]
         public IActionResult Activate(Guid id)
         {
             _catalogProductService.Activate(id);
-
             return Ok();
         }
 
@@ -34,7 +34,6 @@ namespace Api.Controllers
         public IActionResult Deactivate(Guid id)
         {
             _catalogProductService.Deactivate(id);
-
             return Ok();
         }
 
@@ -43,8 +42,8 @@ namespace Api.Controllers
         {
             var (id, description) = dto;
             var command = new EditDescriptionCommand(id, description);
-            _catalogProductService.EditDescription(command);
 
+            _catalogProductService.EditDescription(command);
             return Ok();
         }
 
@@ -53,15 +52,22 @@ namespace Api.Controllers
         {
             var (id, name) = dto;
             var command = new EditNameCommand(id, name);
-            _catalogProductService.EditName(command);
 
+            _catalogProductService.EditName(command);
             return Ok();
         }
 
-        [HttpGet("{id}", Name = "Find")]
-        public IActionResult Find(Guid id)
+        [HttpGet("catalog/{id}", Name = "FindCatalogProduct")]
+        public IActionResult FindCatalogProduct(Guid id)
         {
             var product = _catalogReadService.Find(id);
+            return Ok(product);
+        }
+
+        [HttpGet("sales/{id}")]
+        public IActionResult FindSalesProduct(Guid id)
+        {
+            var product = _salesReadService.Find(id);
             return Ok(product);
         }
 
@@ -70,19 +76,18 @@ namespace Api.Controllers
         {
             var (name, description, sku) = dto;
             var command = new RegisterProductCommand(description, name, sku);
-            var productId = _catalogProductService.Register(command);
 
-            return CreatedAtRoute(nameof(Find), new { id = productId }, null);
+            var productId = _catalogProductService.Register(command);
+            return CreatedAtRoute(nameof(FindCatalogProduct), new { id = productId }, null);
         }
 
         [HttpPut("{id}/price")]
-        public IActionResult SetPrice([FromBody] SetProductPrice dto)
+        public IActionResult SetPrice([FromBody] ProductPrice dto)
         {
-            var (id, price) = dto;
-            var command = new ProductPriceCommand(id, price);
+            var (id, price, sku) = dto;
+            var command = new SetPriceCommand(id, price, sku);
 
             _salesProductService.SetPrice(command);
-
             return Ok();
         }
     }

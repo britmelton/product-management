@@ -13,7 +13,7 @@ namespace Sales.Infrastructure.Write
             Sku = product.Sku;
         }
         [Precision(6, 2)]
-        public decimal Price { get; set; }
+        public decimal? Price { get; set; }
         public string Sku { get;  }
 
         public static implicit operator Sales.Product(Product source) => new(source.Price, source.Sku, source.Id);

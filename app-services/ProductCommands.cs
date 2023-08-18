@@ -16,8 +16,9 @@
         string Sku
     );
 
-    public record ProductPriceCommand(
+    public record SetPriceCommand(
         Guid Id,
-        decimal Price
+        decimal Price,
+        string Sku
     );
 }

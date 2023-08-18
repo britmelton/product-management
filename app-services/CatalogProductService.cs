@@ -50,7 +50,7 @@ namespace App.Services
         public Guid Register(RegisterProductCommand args)
         {
             var (name, description, sku) = args;
-            var product = new Catalog.Product(name, description, sku);
+            var product = new Product(name, description, sku);
             _repo.Register(product);
 
             return product.Id;
