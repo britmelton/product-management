@@ -30,11 +30,12 @@
 
     public record ReceiveShipProduct(
         Guid Id,
-        int Quantity
+        int Quantity,
+        string Sku
     )
     {
 
         public static implicit operator ReceiveShipProduct(Warehouse.Infrastructure.Read.Product source) =>
-            new(source.Id,source.Quantity);
+            new(source.Id,source.Quantity,source.Sku);
     }
 }

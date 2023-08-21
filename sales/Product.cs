@@ -11,7 +11,7 @@
         public decimal Price { get; set; }
         public string Sku { get; }
 
-        public void AdjustPrice(decimal price)
+        public void SetPrice(decimal price)
         {
             Price = price;
         }

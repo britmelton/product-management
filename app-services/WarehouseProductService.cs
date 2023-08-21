@@ -13,7 +13,7 @@ namespace App.Services
 
         public void Receive(ReceiveShipCommand args)
         {
-            var (id, qty) = args;
+            var (id, qty, sku) = args;
 
             var product = _repo.Find(id);
             product.Receive(qty);
@@ -23,7 +23,7 @@ namespace App.Services
 
         public void Ship(ReceiveShipCommand args)
         {
-            var (id, qty) = args;
+            var (id, qty, sku) = args;
 
             var product = _repo.Find(id);
             product.Ship(qty);

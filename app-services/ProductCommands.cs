@@ -2,12 +2,20 @@
 {
     public record EditDescriptionCommand(
         Guid Id,
-        string Description
+        string Description,
+        string Sku
     );
 
     public record EditNameCommand(
         Guid Id,
-        string Name
+        string Name,
+        string Sku
+    );
+
+    public record ReceiveShipCommand(
+        Guid Id,
+        int Quantity,
+        string Sku
     );
 
     public record RegisterProductCommand(
@@ -22,8 +30,8 @@
         string Sku
     );
 
-    public record ReceiveShipCommand(
+    public record UpdateProductStatusCommand(
         Guid Id,
-        int Quantity
+        string Sku
     );
 }

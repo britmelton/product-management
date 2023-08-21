@@ -1,6 +1,7 @@
 ﻿using System.Net.Http.Json;
 using Api.DataContracts;
 using Api.Spec.Setup;
+using App.Services;
 using FluentAssertions;
 
 namespace Api.Spec
@@ -13,13 +14,14 @@ namespace Api.Spec
         [Fact]
         public async void ThenIsActiveReturnsTrue_AndIsStagedReturnsFalse()
         {
-            var dto = new RegisterProduct("product", "description", "abc123");
+            var sku = "abc123";
+            var dto = new RegisterProduct("product", "description", sku);
             var result = await HttpClient.PostAsJsonAsync("", dto);
 
             var id = result.Headers.Location.AbsolutePath.Split('/')[^1];
-
-            await HttpClient.PutAsJsonAsync($"activate/{id}", new object());
-            var product = await HttpClient.GetFromJsonAsync<ProductDetails>($"catalog/{id}");
+            var updateStatusDto = new UpdateProductStatusDto(Guid.Parse(id), sku);
+            await HttpClient.PutAsJsonAsync($"activate/{sku}", updateStatusDto);
+            var product = await HttpClient.GetFromJsonAsync<ProductDetails>($"catalog/{sku}");
 
             product.IsActive.Should().BeTrue();
             product.IsStaged.Should().BeFalse();

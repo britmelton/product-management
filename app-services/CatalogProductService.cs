@@ -11,17 +11,21 @@ namespace App.Services
             _repo = repo;
         }
 
-        public void Activate(Guid id)
+        public void Activate(UpdateProductStatusCommand args)
         {
+            var (id, sku) = args;
             var product = _repo.Find(id);
+
             product.Activate();
 
             _repo.Update(product);
         }
 
-        public void Deactivate(Guid id)
+        public void Deactivate(UpdateProductStatusCommand args)
         {
+            var (id, sku) = args;
             var product = _repo.Find(id);
+
             product.Deactivate();
 
             _repo.Update(product);
@@ -29,7 +33,7 @@ namespace App.Services
 
         public void EditDescription(EditDescriptionCommand args)
         {
-            var (id, description) = args;
+            var (id, description, sku) = args;
 
             var product = _repo.Find(id);
             product.EditDescription(description);
@@ -39,7 +43,7 @@ namespace App.Services
 
         public void EditName(EditNameCommand args)
         {
-            var (id, name) = args;
+            var (id, name, sku) = args;
 
             var product = _repo.Find(id);
             product.EditName(name);

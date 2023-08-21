@@ -17,7 +17,7 @@ namespace Sales.Spec
         public void ThenPriceShouldBeNewPrice()
         {
             var newPrice = 23.98m;
-            _product.AdjustPrice(newPrice);
+            _product.SetPrice(newPrice);
 
             _product.Price.Should().Be(newPrice);
         }

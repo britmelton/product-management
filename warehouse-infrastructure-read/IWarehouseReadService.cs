@@ -2,6 +2,6 @@
 {
     public interface IWarehouseReadService
     {
-        public Product Find(Guid id);
+        public Product Find(string sku);
     }
 }

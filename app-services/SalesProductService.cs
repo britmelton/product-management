@@ -15,7 +15,7 @@ namespace App.Services
             var (id, price, sku) = args;
 
             var product = _repo.Find(id);
-            product.Price = price;
+            product.SetPrice(price);
 
             _repo.Update(product);
         }

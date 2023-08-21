@@ -2,11 +2,18 @@
 {
     public record EditDescriptionDto(
         Guid Id,
-        string Description
+        string Description,
+        string Sku
     );
 
     public record EditNameDto(
         Guid Id,
-        string Name
+        string Name,
+        string Sku
+    );
+
+    public record UpdateProductStatusDto(
+        Guid Id,
+        string Sku
     );
 }

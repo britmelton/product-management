@@ -13,14 +13,15 @@ namespace Api.Spec
         [Fact]
         public async void ThenDescriptionIsNewDescription()
         {
-            var dto = new RegisterProduct("product", "description", "abc123");
+            var sku = "abe123";
+            var dto = new RegisterProduct("product", "description", sku);
             var result = await HttpClient.PostAsJsonAsync("", dto);
 
             var id = result.Headers.Location.AbsolutePath.Split('/')[^1];
-            var editDto = new EditDescriptionDto(Guid.Parse(id), "this is a description");
+            var editDto = new EditDescriptionDto(Guid.Parse(id), "this is a description", sku);
 
-            await HttpClient.PutAsJsonAsync($"description/{id}", editDto);
-            var product = await HttpClient.GetFromJsonAsync<ProductDetails>($"catalog/{id}");
+            await HttpClient.PutAsJsonAsync($"description/{sku}", editDto);
+            var product = await HttpClient.GetFromJsonAsync<ProductDetails>($"catalog/{sku}");
 
             product.Description.Should().Be(editDto.Description);
         }

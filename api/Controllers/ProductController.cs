@@ -2,6 +2,7 @@
 using App.Services;
 using Catalog.Infrastructure.Read;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Sales.Infrastructure.Read;
 using Warehouse.Infrastructure.Read;
 
@@ -32,66 +33,80 @@ namespace Api.Controllers
             _warehouseReadService = warehouseReadService;
         }
 
-        [HttpPut("activate/{id}")]
-        public IActionResult Activate(Guid id)
+        [HttpPut("activate/{sku}")]
+        public IActionResult Activate([FromBody] UpdateProductStatusCommand dto)
         {
-            _catalogProductService.Activate(id);
+            var (id, sku) = dto;
+            var command = new UpdateProductStatusCommand(id, sku);
+
+            _catalogProductService.Activate(command);
             return Ok();
         }
 
-        [HttpPut("deactivate/{id}")]
-        public IActionResult Deactivate(Guid id)
+        [HttpPut("deactivate/{sku}")]
+        public IActionResult Deactivate([FromBody] UpdateProductStatusCommand dto)
         {
-            _catalogProductService.Deactivate(id);
+            var (id, sku) = dto;
+            var command = new UpdateProductStatusCommand(id, sku);
+
+            _catalogProductService.Deactivate(command);
             return Ok();
         }
 
-        [HttpPut("description/{id}")]
+        [HttpPut("description/{sku}")]
         public IActionResult EditDescription([FromBody] EditDescriptionDto dto)
         {
-            var (id, description) = dto;
-            var command = new EditDescriptionCommand(id, description);
+            var (id, description, sku) = dto;
+            var command = new EditDescriptionCommand(id, description, sku);
 
             _catalogProductService.EditDescription(command);
             return Ok();
         }
 
-        [HttpPut("name/{id}")]
+        [HttpPut("name/{sku}")]
         public IActionResult EditName([FromBody] EditNameDto dto)
         {
-            var (id, name) = dto;
-            var command = new EditNameCommand(id, name);
+            var (id, name, sku) = dto;
+            var command = new EditNameCommand(id, name, sku);
 
             _catalogProductService.EditName(command);
             return Ok();
         }
 
-        [HttpGet("catalog/{id}", Name = "FindCatalogProduct")]
+        [HttpGet("catalog/{sku}")]
+        public IActionResult FindCatalogProduct(string sku)
+        {
+            var product = _catalogReadService.Find(sku);
+            return Ok(product);
+        }
+
+        [HttpGet("catalogId/{id}", Name = "FindCatalogProduct")]
         public IActionResult FindCatalogProduct(Guid id)
         {
             var product = _catalogReadService.Find(id);
             return Ok(product);
         }
 
-        [HttpGet("sales/{id}")]
-        public IActionResult FindSalesProduct(Guid id)
+
+        [HttpGet("sales/{sku}")]
+        public IActionResult FindSalesProduct(string sku)
         {
-            var product = _salesReadService.Find(id);
+            var product = _salesReadService.Find(sku);
             return Ok(product);
         }
 
-        [HttpGet("warehouse/{id}")]
-        public IActionResult FindWarehouseProduct(Guid id)
+        [HttpGet("warehouse/{sku}")]
+        public IActionResult FindWarehouseProduct(string sku)
         {
-            var product = _warehouseReadService.Find(id);
+            var product = _warehouseReadService.Find(sku);
             return Ok(product);
         }
 
-        [HttpPut("receive/{id}")]
+        [HttpPut("receive/{sku}")]
         public IActionResult ReceiveProducts([FromBody] ReceiveShipProduct dto)
         {
-            var (id, qty) = dto;
-            var command = new ReceiveShipCommand(id, qty);
+            var (id, qty, sku) = dto;
+            var command = new ReceiveShipCommand(id, qty, sku);
 
             _warehouseProductService.Receive(command);
             return Ok();
@@ -107,7 +122,7 @@ namespace Api.Controllers
             return CreatedAtRoute(nameof(FindCatalogProduct), new { id = productId }, null);
         }
 
-        [HttpPut("price/{id}")]
+        [HttpPut("price/{sku}")]
         public IActionResult SetPrice([FromBody] ProductPrice dto)
         {
             var (id, price, sku) = dto;
@@ -117,11 +132,11 @@ namespace Api.Controllers
             return Ok();
         }
 
-        [HttpPut("ship/{id}")]
+        [HttpPut("ship/{sku}")]
         public IActionResult ShipProducts([FromBody] ReceiveShipProduct dto)
         {
-            var (id, qty) = dto;
-            var command = new ReceiveShipCommand(id, qty);
+            var (id, qty, sku) = dto;
+            var command = new ReceiveShipCommand(id, qty, sku);
 
             _warehouseProductService.Ship(command);
             return Ok();
