@@ -18,7 +18,7 @@ namespace Api.Spec
 
             var id = result.Headers.Location.AbsolutePath.Split('/')[^1];
 
-            await HttpClient.PutAsJsonAsync($"{id}/activate", new object());
+            await HttpClient.PutAsJsonAsync($"activate/{id}", new object());
             var product = await HttpClient.GetFromJsonAsync<ProductDetails>($"catalog/{id}");
 
             product.IsActive.Should().BeTrue();

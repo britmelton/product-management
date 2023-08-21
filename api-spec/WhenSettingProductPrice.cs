@@ -20,7 +20,7 @@ namespace Api.Spec
 
             var price = 28.25m;
             var dto = new ProductPrice(Guid.Parse(id), price, sku);
-            await HttpClient.PutAsJsonAsync($"{id}/price", dto);
+            await HttpClient.PutAsJsonAsync($"price/{id}", dto);
 
             var product = await HttpClient.GetFromJsonAsync<ProductPrice>($"sales/{id}");
 

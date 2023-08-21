@@ -32,21 +32,21 @@ namespace Api.Controllers
             _warehouseReadService = warehouseReadService;
         }
 
-        [HttpPut("{id}/activate")]
+        [HttpPut("activate/{id}")]
         public IActionResult Activate(Guid id)
         {
             _catalogProductService.Activate(id);
             return Ok();
         }
 
-        [HttpPut("{id}/deactivate")]
+        [HttpPut("deactivate/{id}")]
         public IActionResult Deactivate(Guid id)
         {
             _catalogProductService.Deactivate(id);
             return Ok();
         }
 
-        [HttpPut("{id}/description")]
+        [HttpPut("description/{id}")]
         public IActionResult EditDescription([FromBody] EditDescriptionDto dto)
         {
             var (id, description) = dto;
@@ -56,7 +56,7 @@ namespace Api.Controllers
             return Ok();
         }
 
-        [HttpPut("{id}/name")]
+        [HttpPut("name/{id}")]
         public IActionResult EditName([FromBody] EditNameDto dto)
         {
             var (id, name) = dto;
@@ -107,7 +107,7 @@ namespace Api.Controllers
             return CreatedAtRoute(nameof(FindCatalogProduct), new { id = productId }, null);
         }
 
-        [HttpPut("{id}/price")]
+        [HttpPut("price/{id}")]
         public IActionResult SetPrice([FromBody] ProductPrice dto)
         {
             var (id, price, sku) = dto;

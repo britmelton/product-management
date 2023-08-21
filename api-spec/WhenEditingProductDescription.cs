@@ -19,7 +19,7 @@ namespace Api.Spec
             var id = result.Headers.Location.AbsolutePath.Split('/')[^1];
             var editDto = new EditDescriptionDto(Guid.Parse(id), "this is a description");
 
-            await HttpClient.PutAsJsonAsync($"{id}/description", editDto);
+            await HttpClient.PutAsJsonAsync($"description/{id}", editDto);
             var product = await HttpClient.GetFromJsonAsync<ProductDetails>($"catalog/{id}");
 
             product.Description.Should().Be(editDto.Description);

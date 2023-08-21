@@ -19,7 +19,7 @@ namespace Api.Spec
             var id = result.Headers.Location.AbsolutePath.Split('/')[^1];
             var editDto = new EditNameDto(Guid.Parse(id), "newName");
 
-            await HttpClient.PutAsJsonAsync($"{id}/name", editDto);
+            await HttpClient.PutAsJsonAsync($"name/{id}", editDto);
             var product = await HttpClient.GetFromJsonAsync<ProductDetails>($"catalog/{id}");
 
             product.Name.Should().Be(editDto.Name);
