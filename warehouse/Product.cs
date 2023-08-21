@@ -19,5 +19,10 @@
         {
             Quantity += qty;
         }
+
+        public void Ship(int qty)
+        {
+            Quantity -= qty;
+        }
     }
 }
