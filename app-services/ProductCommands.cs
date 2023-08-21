@@ -21,4 +21,9 @@
         decimal Price,
         string Sku
     );
+
+    public record ReceiveShipCommand(
+        Guid Id,
+        int Quantity
+    );
 }

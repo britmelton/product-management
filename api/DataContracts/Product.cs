@@ -13,10 +13,10 @@
     }
 
     public record RegisterProduct(
-            string Description,
-            string Name,
-            string Sku
-        );
+        string Description,
+        string Name,
+        string Sku
+    );
 
     public record ProductPrice(
         Guid Id,
@@ -26,5 +26,15 @@
     {
         public static implicit operator ProductPrice(Sales.Infrastructure.Read.Product source) =>
             new(source.Id, source.Price.Value, source.Sku);
+    }
+
+    public record ReceiveShipProduct(
+        Guid Id,
+        int Quantity
+    )
+    {
+
+        public static implicit operator ReceiveShipProduct(Warehouse.Infrastructure.Read.Product source) =>
+            new(source.Id,source.Quantity);
     }
 }

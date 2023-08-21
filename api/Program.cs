@@ -6,6 +6,9 @@ using Microsoft.EntityFrameworkCore;
 using Sales;
 using Sales.Infrastructure.Read;
 using Sales.Infrastructure.Write;
+using Warehouse;
+using Warehouse.Infrastructure.Read;
+using Warehouse.Infrastructure.Write;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,15 +19,17 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddDbContext<Infrastructure.Write.Context>(options => options.UseSqlServer(
+    builder.Configuration.GetConnectionString("SqlServer")
+));
+
 builder.Services.AddDbContext<Catalog.Infrastructure.Write.Context>(options => options.UseSqlServer(
     builder.Configuration.GetConnectionString("SqlServer")
 ));
-
 builder.Services.AddDbContext<Sales.Infrastructure.Write.Context>(options => options.UseSqlServer(
     builder.Configuration.GetConnectionString("SqlServer")
 ));
-
-builder.Services.AddDbContext<Infrastructure.Write.Context>(options => options.UseSqlServer(
+builder.Services.AddDbContext<Warehouse.Infrastructure.Write.Context>(options => options.UseSqlServer(
     builder.Configuration.GetConnectionString("SqlServer")
 ));
 
@@ -36,6 +41,9 @@ builder.Services.AddTransient<ISalesProductRepository, SalesProductRepository>()
 builder.Services.AddTransient<ISalesProductService, SalesProductService>();
 builder.Services.AddTransient<ISalesReadService, SalesReadService>();
 
+builder.Services.AddTransient<IWarehouseProductRepository, WarehouseProductRepository>();
+builder.Services.AddTransient<IWarehouseProductService, WarehouseProductService>();
+builder.Services.AddTransient<IWarehouseReadService, WarehouseReadService>();
 
 var app = builder.Build();
 

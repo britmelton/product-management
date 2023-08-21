@@ -3,6 +3,7 @@ using App.Services;
 using Catalog.Infrastructure.Read;
 using Microsoft.AspNetCore.Mvc;
 using Sales.Infrastructure.Read;
+using Warehouse.Infrastructure.Read;
 
 namespace Api.Controllers
 {
@@ -11,16 +12,24 @@ namespace Api.Controllers
     public class ProductController : ControllerBase
     {
         private readonly ICatalogProductService _catalogProductService;
-        private readonly ISalesProductService _salesProductService;
         private readonly ICatalogReadService _catalogReadService;
+        private readonly ISalesProductService _salesProductService;
         private readonly ISalesReadService _salesReadService;
+        private readonly IWarehouseProductService _warehouseProductService;
+        private readonly IWarehouseReadService _warehouseReadService;
 
-        public ProductController(ICatalogProductService catalogProductService, ICatalogReadService catalogReadService, ISalesProductService salesProductService, ISalesReadService salesReadService)
+        public ProductController(
+            ICatalogProductService catalogProductService, ICatalogReadService catalogReadService, 
+            ISalesProductService salesProductService, ISalesReadService salesReadService, 
+            IWarehouseProductService warehouseProductService, IWarehouseReadService warehouseReadService
+            )
         {
             _catalogProductService = catalogProductService;
             _catalogReadService = catalogReadService;
             _salesProductService = salesProductService;
             _salesReadService = salesReadService;
+            _warehouseProductService = warehouseProductService;
+            _warehouseReadService = warehouseReadService;
         }
 
         [HttpPut("{id}/activate")]
@@ -71,6 +80,23 @@ namespace Api.Controllers
             return Ok(product);
         }
 
+        [HttpGet("warehouse/{id}")]
+        public IActionResult FindWarehouseProduct(Guid id)
+        {
+            var product = _warehouseReadService.Find(id);
+            return Ok(product);
+        }
+
+        [HttpPut("receive/{id}")]
+        public IActionResult ReceiveProducts([FromBody] ReceiveShipProduct dto)
+        {
+            var (id, qty) = dto;
+            var command = new ReceiveShipCommand(id, qty);
+
+            _warehouseProductService.Receive(command);
+            return Ok();
+        }
+
         [HttpPost]
         public IActionResult RegisterProduct([FromBody] RegisterProduct dto)
         {
@@ -88,6 +114,16 @@ namespace Api.Controllers
             var command = new SetPriceCommand(id, price, sku);
 
             _salesProductService.SetPrice(command);
+            return Ok();
+        }
+
+        [HttpPut("ship/{id}")]
+        public IActionResult ShipProducts([FromBody] ReceiveShipProduct dto)
+        {
+            var (id, qty) = dto;
+            var command = new ReceiveShipCommand(id, qty);
+
+            _warehouseProductService.Ship(command);
             return Ok();
         }
     }

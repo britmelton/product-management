@@ -22,6 +22,8 @@
     <ProjectReference Include="..\infrastructure-write\infrastructure-write.csproj" />
     <ProjectReference Include="..\sales-infrastructure-read\sales-infrastructure-read.csproj" />
     <ProjectReference Include="..\sales-infrastructure-write\sales-infrastructure-write.csproj" />
+    <ProjectReference Include="..\warehouse-infrastructure-read\warehouse-infrastructure-read.csproj" />
+    <ProjectReference Include="..\warehouse-infrastructure-write\warehouse-infrastructure-write.csproj" />
   </ItemGroup>
 
 </Project>

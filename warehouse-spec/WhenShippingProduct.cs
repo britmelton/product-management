@@ -6,7 +6,7 @@ namespace Warehouse.Spec
     {
         private readonly string _description = "product description";
         private readonly string _name = "product name";
-        private readonly int _quantity = 34;
+        private int _quantity;
         private readonly string _sku = "abc123";
 
         [Fact]
@@ -23,6 +23,7 @@ namespace Warehouse.Spec
         [Fact]
         public void WhenNotShippingTotal_ThenProductQuantityIsUpdated()
         {
+            _quantity = 34;
             var product = new Product(_description, _name, _quantity, _sku);
 
             product.Receive(50);
