@@ -1,4 +1,7 @@
-﻿namespace Catalog.Infrastructure.Write
+﻿using System.Reflection.Metadata.Ecma335;
+using Microsoft.EntityFrameworkCore;
+
+namespace Catalog.Infrastructure.Write
 {
     public class CatalogProductRepository : ICatalogProductRepository
     {

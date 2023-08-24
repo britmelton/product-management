@@ -2,7 +2,6 @@
 using App.Services;
 using Catalog.Infrastructure.Read;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Sales.Infrastructure.Read;
 using Warehouse.Infrastructure.Read;
 

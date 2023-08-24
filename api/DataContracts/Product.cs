@@ -1,6 +1,7 @@
 ﻿namespace Api.DataContracts
 {
     public record ProductDetails(
+        Guid Id,
         string Description,
         string Name,
         string Sku,
@@ -9,7 +10,7 @@
     )
     {
         public static implicit operator ProductDetails(Catalog.Infrastructure.Read.Product source) =>
-            new(source.Description, source.Name, source.Sku, source.IsActive, source.IsStaged);
+            new(source.Id,source.Description, source.Name, source.Sku, source.IsActive, source.IsStaged);
     }
 
     public record RegisterProduct(
