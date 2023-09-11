@@ -17,7 +17,7 @@ namespace Warehouse.Infrastructure.Write
         public string Description { get; }
         public string Name { get; }
         public int Quantity { get; set; }
-        public string Sku { get; }
+        public string Sku { get; set; }
 
         public static implicit operator Warehouse.Product(Product source) => new(source.Description, source.Name, source.Quantity, source.Sku, source.Id);
 

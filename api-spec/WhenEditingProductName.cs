@@ -1,6 +1,7 @@
 ﻿using System.Net.Http.Json;
 using Api.DataContracts;
 using Api.Spec.Setup;
+using Catalog;
 using FluentAssertions;
 
 namespace Api.Spec
@@ -24,6 +25,9 @@ namespace Api.Spec
             var product = await HttpClient.GetFromJsonAsync<ProductDetails>($"catalog/{sku}");
 
             product.Name.Should().Be(editDto.Name);
+
+            var catalogRepo = Resolve<ICatalogProductRepository>();
+            catalogRepo.Delete(Guid.Parse(id));
         }
     }
 }

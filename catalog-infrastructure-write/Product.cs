@@ -12,7 +12,7 @@
             IsStaged = product.Status.HasFlag(ProductStatus.Staged);
             Name = product.Name;
             Sku = product.Sku;
-        }
+        } 
 
         public string Description { get; set; }
         public bool IsActive { get; set; }

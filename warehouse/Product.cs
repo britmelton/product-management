@@ -23,6 +23,6 @@
         public void Ship(int qty)
         {
             Quantity -= qty;
-        }
+        } 
     }
 }

@@ -2,6 +2,7 @@
 using Api.DataContracts;
 using Api.Spec.Setup;
 using FluentAssertions;
+using Sales;
 
 namespace Api.Spec
 {
@@ -26,6 +27,9 @@ namespace Api.Spec
 
             product.Should().NotBeNull();
             product.Price.Should().Be(price);
+
+            var salesRepo = Resolve<ISalesProductRepository>();
+            salesRepo.Delete(product.Sku);
         }
     }
 }

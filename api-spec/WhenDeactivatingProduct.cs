@@ -1,5 +1,6 @@
 ﻿using Api.DataContracts;
 using Api.Spec.Setup;
+using Catalog;
 using FluentAssertions;
 using System.Net.Http.Json;
 
@@ -26,6 +27,9 @@ namespace Api.Spec
 
             product.IsActive.Should().BeFalse();
             product.IsStaged.Should().BeFalse();
+
+            var catalogRepo = Resolve<ICatalogProductRepository>();
+            catalogRepo.Delete(Guid.Parse(id));
         }
     }
 }

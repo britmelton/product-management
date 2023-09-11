@@ -32,13 +32,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "sales-infrastructure-write"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "infrastructure-write", "infrastructure-write\infrastructure-write.csproj", "{2FE1D1C4-715A-4D88-8011-F9E4EEAC290B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "warehouse-spec", "warehouse-spec\warehouse-spec.csproj", "{C4BB1580-F659-43DE-81D9-924B7EC0A300}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "warehouse-spec", "warehouse-spec\warehouse-spec.csproj", "{C4BB1580-F659-43DE-81D9-924B7EC0A300}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "warehouse", "warehouse\warehouse.csproj", "{1B53C77D-FAA9-4278-8D9C-000C383D57DE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "warehouse", "warehouse\warehouse.csproj", "{1B53C77D-FAA9-4278-8D9C-000C383D57DE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "warehouse-infrastructure-write", "warehouse-infrastructure-write\warehouse-infrastructure-write.csproj", "{50D21C52-DD83-460F-A81B-C2C13DF540C7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "warehouse-infrastructure-write", "warehouse-infrastructure-write\warehouse-infrastructure-write.csproj", "{50D21C52-DD83-460F-A81B-C2C13DF540C7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "warehouse-infrastructure-read", "warehouse-infrastructure-read\warehouse-infrastructure-read.csproj", "{01D5C55C-407C-41B9-9958-BCD9A2CBD023}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "warehouse-infrastructure-read", "warehouse-infrastructure-read\warehouse-infrastructure-read.csproj", "{01D5C55C-407C-41B9-9958-BCD9A2CBD023}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Catalog", "Catalog", "{BB5E6572-FCDE-45DD-A90E-12FC77D6BA20}"
 EndProject
@@ -46,7 +46,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sales", "Sales", "{9014210C
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Warehouse", "Warehouse", "{ACCEB388-9A4A-4179-95F4-5B132FA55CDA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "shop", "shop\shop.csproj", "{1F9C6534-FBDB-4009-82DB-AA1F81AAB94E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "shop-console", "shop\shop-console.csproj", "{1F9C6534-FBDB-4009-82DB-AA1F81AAB94E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

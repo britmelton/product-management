@@ -2,6 +2,7 @@
 using Api.Spec.Setup;
 using System.Net.Http.Json;
 using FluentAssertions;
+using Warehouse;
 
 namespace Api.Spec
 {
@@ -25,6 +26,9 @@ namespace Api.Spec
             var product = await HttpClient.GetFromJsonAsync<ReceiveShipProduct>($"warehouse/{sku}");
 
             product.Quantity.Should().Be(20);
+
+            var warehouseRepo = Resolve<IWarehouseProductRepository>();
+            warehouseRepo.Delete(Guid.Parse(id));
         }
     }
 }

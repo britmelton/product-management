@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-	  <RootNamespace>Shop</RootNamespace>
+	  <RootNamespace>Shop.Console</RootNamespace>
 	  <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>

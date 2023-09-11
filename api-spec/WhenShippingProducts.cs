@@ -2,6 +2,7 @@
 using Api.DataContracts;
 using Api.Spec.Setup;
 using FluentAssertions;
+using Warehouse;
 
 namespace Api.Spec
 {
@@ -26,6 +27,9 @@ namespace Api.Spec
             var product = await HttpClient.GetFromJsonAsync<ReceiveShipProduct>($"warehouse/{sku}");
 
             product.Quantity.Should().Be(0);
+
+            var warehouseRepo = Resolve<IWarehouseProductRepository>();
+            warehouseRepo.Delete(product.Sku);
         }
     }
 }

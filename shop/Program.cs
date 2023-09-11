@@ -1,9 +1,5 @@
-﻿using System.Linq.Expressions;
-using System.Net.Http.Json;
-using System.Reflection.PortableExecutable;
-using Api;
+﻿using System.Net.Http.Json;
 using Api.DataContracts;
-using static Catalog.Product;
 
 namespace Shop
 {

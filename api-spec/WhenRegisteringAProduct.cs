@@ -1,6 +1,7 @@
 ﻿using Api.DataContracts;
 using Api.Spec.Setup;
 using System.Net.Http.Json;
+using Catalog;
 using FluentAssertions;
 
 namespace Api.Spec
@@ -21,6 +22,9 @@ namespace Api.Spec
             product.Should().NotBeNull();
             product.IsStaged.Should().BeTrue();
             product.IsActive.Should().BeFalse();
+
+            var catalogRepo = Resolve<ICatalogProductRepository>();
+            catalogRepo.Delete(product.Sku);
         }
     }
 }
