@@ -22,7 +22,7 @@ namespace Api.Spec
             product.Should().NotBeNull();
             product.IsStaged.Should().BeTrue();
             product.IsActive.Should().BeFalse();
-
+             
             var catalogRepo = Resolve<ICatalogProductRepository>();
             catalogRepo.Delete(product.Sku);
         }

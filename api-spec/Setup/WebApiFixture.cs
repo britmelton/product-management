@@ -4,6 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Api.Spec.Setup
 {
+    [Collection("storage")] //anything marked with this will run synchronously
     public abstract class WebApiFixture : IClassFixture<IntegrationTestingFactory<Program>>
     {
         private static IServiceScope _scope;
