@@ -2,34 +2,35 @@
 using Api.Spec.Setup;
 using Catalog;
 using FluentAssertions;
+using FluentAssertions.Execution;
 using System.Net.Http.Json;
 
-namespace Api.Spec
+namespace Api.Spec;
+
+public class WhenDeactivatingProduct : WebApiFixture
 {
-    public class WhenDeactivatingProduct : WebApiFixture
+    public WhenDeactivatingProduct(IntegrationTestingFactory<Program> factory, string uri = default)
+        : base(factory, "catalog/products") { }
+
+    [Fact]
+    public async void ThenIsActiveReturnsFalse_AndIsStagedReturnsFalse()
     {
-        public WhenDeactivatingProduct(IntegrationTestingFactory<Program> factory, string uri = default) 
-            : base(factory, "product") { }
+        var sku = "abd123";
+        var dto = new RegisterProduct("product", "description", sku);
 
-        [Fact]
-        public async void ThenIsActiveReturnsFalse_AndIsStagedReturnsFalse()
-        {
-            var sku = "abd123";
-            var dto = new RegisterProduct("product", "description", sku);
-            var result = await HttpClient.PostAsJsonAsync("", dto);
+        await HttpClient.PostAsJsonAsync("", dto);
 
-            var id = result.Headers.Location.AbsolutePath.Split('/')[^1];
-            var updateStatusDto = new UpdateProductStatusDto(Guid.Parse(id), sku);
-            await HttpClient.PutAsJsonAsync($"activate/{sku}", updateStatusDto);
-            await HttpClient.PutAsJsonAsync($"deactivate/{sku}", updateStatusDto);
+        var updateStatusDto = new UpdateProductStatusDto(sku);
+        await HttpClient.PutAsJsonAsync($"{sku}/activate", updateStatusDto);
+        await HttpClient.PutAsJsonAsync($"{sku}/deactivate", updateStatusDto);
 
-            var product = await HttpClient.GetFromJsonAsync<ProductDetails>($"catalog/{sku}");
+        var product = await HttpClient.GetFromJsonAsync<ProductDetails>($"{sku}");
 
-            product.IsActive.Should().BeFalse();
-            product.IsStaged.Should().BeFalse();
+        var scope = new AssertionScope();
+        product.IsActive.Should().BeFalse();
+        product.IsStaged.Should().BeFalse();
 
-            var catalogRepo = Resolve<ICatalogProductRepository>();
-            catalogRepo.Delete(Guid.Parse(id));
-        }
+        var catalogRepo = Resolve<ICatalogProductRepository>();
+        catalogRepo.Delete(sku);
     }
 }

@@ -6,6 +6,6 @@
         public void Deactivate(UpdateProductStatusCommand args);
         public void EditDescription(EditDescriptionCommand args);
         public void EditName(EditNameCommand args);
-        public Guid Register(RegisterProductCommand args);
+        public void Register(RegisterProductCommand args);
     }
 }

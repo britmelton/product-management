@@ -2,34 +2,37 @@
 using Api.DataContracts;
 using Api.Spec.Setup;
 using FluentAssertions;
+using FluentAssertions.Execution;
 using Sales;
 
-namespace Api.Spec
+namespace Api.Spec;
+
+public class WhenSettingProductPrice : WebApiFixture
 {
-    public class WhenSettingProductPrice : WebApiFixture
+    private const string _salesProducts = "sales/products";
+    public WhenSettingProductPrice(IntegrationTestingFactory<Program> factory)
+        : base(factory, "") { }
+
+    [Fact]
+    public async void ThenPriceIsSet()
     {
-        public WhenSettingProductPrice(IntegrationTestingFactory<Program> factory)
-            : base(factory, "product") { }
+        var price = 28.25m;
+        var sku = "abi123";
 
-        [Fact]
-        public async void ThenPriceIsSet()
-        {
-            var sku = "abi123";
-            var createProduct = new RegisterProduct("product", "description", sku);
-            var newProduct = await HttpClient.PostAsJsonAsync("", createProduct);
-            var id = newProduct.Headers.Location.AbsolutePath.Split('/')[^1];
+        var createProduct = new RegisterProduct("", "description", sku);
 
-            var price = 28.25m;
-            var dto = new ProductPrice(Guid.Parse(id), price, sku);
-            await HttpClient.PutAsJsonAsync($"price/{sku}", dto);
+        await HttpClient.PostAsJsonAsync("catalog/products", createProduct);
 
-            var product = await HttpClient.GetFromJsonAsync<ProductPrice>($"sales/{sku}");
+        var dto = new ProductPrice(price, sku);
+        await HttpClient.PutAsJsonAsync($"{_salesProducts}/{sku}/price", dto);
 
-            product.Should().NotBeNull();
-            product.Price.Should().Be(price);
+        var product = await HttpClient.GetFromJsonAsync<ProductPrice>($"{_salesProducts}/{sku}");
 
-            var salesRepo = Resolve<ISalesProductRepository>();
-            salesRepo.Delete(product.Sku);
-        }
+        var scope = new AssertionScope();
+        product.Should().NotBeNull();
+        product.Price.Should().Be(price);
+
+        var salesRepo = Resolve<ISalesProductRepository>();
+        salesRepo.Delete(product.Sku);
     }
 }

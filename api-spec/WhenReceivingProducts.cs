@@ -4,31 +4,31 @@ using System.Net.Http.Json;
 using FluentAssertions;
 using Warehouse;
 
-namespace Api.Spec
+namespace Api.Spec;
+
+public class WhenReceivingProducts : WebApiFixture
 {
-    public class WhenReceivingProducts : WebApiFixture
+    private const string _warehouseProducts = "warehouse/products";
+    public WhenReceivingProducts(IntegrationTestingFactory<Program> factory)
+        : base(factory, "") { }
+
+    [Fact]
+    public async void ThenProductQuantityIsUpdated()
     {
-        public WhenReceivingProducts(IntegrationTestingFactory<Program> factory)
-            : base(factory, "product") { }
+        var qty = 20;
+        var sku = "abg123";
 
-        [Fact]
-        public async void ThenProductQuantityIsUpdated()
-        {
-            var sku = "abg123";
-            var regProduct = new RegisterProduct("product", "description", sku);
-            var newProduct = await HttpClient.PostAsJsonAsync("", regProduct);
-            var id = newProduct.Headers.Location.AbsolutePath.Split('/')[^1];
+        var regProduct = new RegisterProduct("product", "description", sku);
+        await HttpClient.PostAsJsonAsync("catalog/products", regProduct);
 
-            var qty = 20;
-            var dto = new ReceiveShipProduct(Guid.Parse(id), qty, sku);
-            await HttpClient.PutAsJsonAsync($"receive/{sku}", dto);
+        var dto = new ReceiveShipProduct(qty, sku);
+        await HttpClient.PutAsJsonAsync($"{_warehouseProducts}/{sku}/receive", dto);
 
-            var product = await HttpClient.GetFromJsonAsync<ReceiveShipProduct>($"warehouse/{sku}");
+        var product = await HttpClient.GetFromJsonAsync<ReceiveShipProduct>($"{_warehouseProducts}/{sku}");
 
-            product.Quantity.Should().Be(20);
+        product.Quantity.Should().Be(20);
 
-            var warehouseRepo = Resolve<IWarehouseProductRepository>();
-            warehouseRepo.Delete(Guid.Parse(id));
-        }
+        var warehouseRepo = Resolve<IWarehouseProductRepository>();
+        warehouseRepo.Delete(sku);
     }
 }

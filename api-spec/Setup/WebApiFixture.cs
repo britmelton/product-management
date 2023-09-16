@@ -16,7 +16,7 @@ namespace Api.Spec.Setup
             _scope = factory.Services.CreateScope();
 
             if (uri != default)
-                factory.ClientOptions.BaseAddress = new Uri($"http://localhost/api/{uri}/");
+                factory.ClientOptions.BaseAddress = new Uri($"http://localhost/api/{uri}{(uri == string.Empty ? "" : "/")}");
             HttpClient = factory.CreateClient();
         }
 

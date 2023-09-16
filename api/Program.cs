@@ -45,6 +45,12 @@ builder.Services.AddTransient<IWarehouseProductRepository, WarehouseProductRepos
 builder.Services.AddTransient<IWarehouseProductService, WarehouseProductService>();
 builder.Services.AddTransient<IWarehouseReadService, WarehouseReadService>();
 
+builder.Services.Configure<RouteOptions>(
+    options =>
+    {
+        options.LowercaseUrls = true;
+    });
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

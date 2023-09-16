@@ -4,32 +4,33 @@ using Api.Spec.Setup;
 using FluentAssertions;
 using Warehouse;
 
-namespace Api.Spec
+namespace Api.Spec;
+
+public class WhenShippingProducts : WebApiFixture
 {
-    public class WhenShippingProducts : WebApiFixture
+    private const string _warehouseProducts = "warehouse/products";
+    public WhenShippingProducts(IntegrationTestingFactory<Program> factory)
+        : base(factory, "") { }
+
+    [Fact]
+    public async void ThenProductQuantityIsUpdated()
     {
-        public WhenShippingProducts(IntegrationTestingFactory<Program> factory)
-            : base(factory, "product") { }
+        var qty = 20;
+        var sku = "abj123";
 
-        [Fact]
-        public async void ThenProductQuantityIsUpdated()
-        {
-            var sku = "abj123";
-            var regProduct = new RegisterProduct("product", "description", sku);
-            var newProduct = await HttpClient.PostAsJsonAsync("", regProduct);
-            var id = newProduct.Headers.Location.AbsolutePath.Split('/')[^1];
+        var regProduct = new RegisterProduct("description", "name", sku);
 
-            var qty = 20;
-            var dto = new ReceiveShipProduct(Guid.Parse(id),qty, sku);
-            await HttpClient.PutAsJsonAsync($"receive/{sku}", dto);
-            await HttpClient.PutAsJsonAsync($"ship/{sku}", dto);
+        await HttpClient.PostAsJsonAsync("catalog/products", regProduct);
 
-            var product = await HttpClient.GetFromJsonAsync<ReceiveShipProduct>($"warehouse/{sku}");
+        var dto = new ReceiveShipProduct(qty, sku);
+        await HttpClient.PutAsJsonAsync($"{_warehouseProducts}/{sku}/receive", dto);
+        await HttpClient.PutAsJsonAsync($"{_warehouseProducts}/{sku}/ship", dto);
 
-            product.Quantity.Should().Be(0);
+        var product = await HttpClient.GetFromJsonAsync<ReceiveShipProduct>($"{_warehouseProducts}/{sku}");
 
-            var warehouseRepo = Resolve<IWarehouseProductRepository>();
-            warehouseRepo.Delete(product.Sku);
-        }
+        product.Quantity.Should().Be(0);
+
+        var warehouseRepo = Resolve<IWarehouseProductRepository>();
+        warehouseRepo.Delete(product.Sku);
     }
 }

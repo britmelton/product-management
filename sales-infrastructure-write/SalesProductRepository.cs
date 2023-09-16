@@ -29,6 +29,7 @@ namespace Sales.Infrastructure.Write
 
         private Sales.Product Find(Expression<Func<Product, bool>> predicate) => _context.Product.First(predicate);
         public Sales.Product Find(Guid id) => Find(x => x.Id == id);
+        public Sales.Product Find(string sku) => Find(x => x.Sku == sku);
         private Product FindInf(Expression<Func<Product, bool>> predicate) => _context.Product.First(predicate);
         public Product FindInf(Guid id) => FindInf(x => x.Id == id);
         public Product FindInf(string sku) => FindInf(x => x.Sku == sku);

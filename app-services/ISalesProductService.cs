@@ -1,4 +1,6 @@
-﻿namespace App.Services
+﻿using Catalog;
+
+namespace App.Services
 {
     public interface ISalesProductService
     {

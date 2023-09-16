@@ -10,11 +10,12 @@ namespace App.Services
         {
             _repo = repo;
         }
+
         public void SetPrice(SetPriceCommand args)
         {
-            var (id, price, sku) = args;
+            var (price, sku) = args;
 
-            var product = _repo.Find(id);
+            var product = _repo.Find(sku);
             product.SetPrice(price);
 
             _repo.Update(product);

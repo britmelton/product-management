@@ -141,7 +141,7 @@ namespace Shop;
         public static async Task<ProductDetails> UpdateStatus(string state, string sku)
         {
             var product = await Client.GetFromJsonAsync<ProductDetails>($"https://localhost:7227/api/Product/catalog/{sku}");
-            var updateStatusDto = new UpdateProductStatusDto(product.Id, sku);
+            var updateStatusDto = new UpdateProductStatusDto(sku);
             if (state is "activate")
                 await Client.PutAsJsonAsync($"https://localhost:7227/api/Product/activate/{sku}", updateStatusDto);
             else if (state is "deactivate")
@@ -156,8 +156,8 @@ namespace Shop;
         {
             var product = await Client.GetFromJsonAsync<ProductDetails>($"https://localhost:7227/api/Product/catalog/{sku}");
 
-            var updateStatusDto = new UpdateProductStatusDto(product.Id, sku);
-            var editDto = new EditNameDto(product.Id, name, sku);
+            var updateStatusDto = new UpdateProductStatusDto(sku);
+            var editDto = new EditNameDto(name, sku);
 
             await Client.PutAsJsonAsync($"https://localhost:7227/api/Product/name/{sku}", editDto);
 

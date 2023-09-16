@@ -13,9 +13,9 @@ namespace App.Services
 
         public void Receive(ReceiveShipCommand args)
         {
-            var (id, qty, sku) = args;
+            var (qty, sku) = args;
 
-            var product = _repo.Find(id);
+            var product = _repo.Find(sku);
             product.Receive(qty);
 
             _repo.Update(product);
@@ -23,9 +23,9 @@ namespace App.Services
 
         public void Ship(ReceiveShipCommand args)
         {
-            var (id, qty, sku) = args;
+            var (qty, sku) = args;
 
-            var product = _repo.Find(id);
+            var product = _repo.Find(sku);
             product.Ship(qty);
 
             _repo.Update(product);
