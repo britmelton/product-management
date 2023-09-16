@@ -1,47 +1,37 @@
 ﻿using FluentAssertions;
+using static Catalog.Spec.Kernel.ObjectProvider;
 
-namespace Catalog.Spec.Products
+namespace Catalog.Spec.Products;
+
+public class WhenRegisteringAProduct
 {
-    public class WhenRegisteringAProduct
+    [Fact]
+    public void ThenDescriptionIsSet()
     {
-        private readonly Product _product;
-        private readonly string _description = "product description";
-        private readonly string _name = "product name";
-        private readonly Sku _sku = new("abc123");
+        RegisteredProduct.Description.Should().Be(_description);
+    }
 
-        public WhenRegisteringAProduct()
-        {
-            _product = new(_description, _name, _sku);
-        }
+    [Fact]
+    public void ThenIdIsSet()
+    {
+        RegisteredProduct.Id.Should().NotBeEmpty();
+    }
 
-        [Fact]
-        public void ThenDescriptionIsSet()
-        {
-            _product.Description.Should().Be(_description);
-        }
+    [Fact]
+    public void ThenNameIsSet()
+    {
+        RegisteredProduct.Name.Should().Be(_name);
+    }
 
-        [Fact]
-        public void ThenProductIsStaged()
-        {
-            _product.Status.Should().Be(ProductStatus.Staged);
-        }
+    [Fact]
+    public void ThenProductIsStaged()
+    {
+        RegisteredProduct.Status.Should().Be(ProductStatus.Staged);
+    }
 
-        [Fact]
-        public void ThenIdIsSet()
-        {
-            _product.Id.Should().NotBeEmpty();
-        }
-
-        [Fact]
-        public void ThenNameIsSet()
-        {
-            _product.Name.Should().Be(_name);
-        }
-
-        [Fact]
-        public void ThenSkuIsSet()
-        {
-            _product.Sku.Should().Be(_sku);
-        }
+    [Fact]
+    public void ThenSkuIsSet()
+    {
+        RegisteredProduct.Sku.Should().Be(_sku);
     }
 }

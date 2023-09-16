@@ -1,10 +1,11 @@
 ﻿using System.Net.Http.Json;
 using Api.DataContracts;
 
-namespace Shop
-{
+namespace Shop;
+
     internal class Program
     {
+        // this is a work in progress
         static void Main(string[] args)
         {
 
@@ -165,4 +166,4 @@ namespace Shop
             return response;
         }
     }
-}
+

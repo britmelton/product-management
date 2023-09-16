@@ -1,25 +1,15 @@
 ﻿using FluentAssertions;
+using static Catalog.Spec.Kernel.ObjectProvider;
 
-namespace Catalog.Spec.Products
+namespace Catalog.Spec.Products;
+public class WhenDeactivatingProduct
 {
-    public class WhenDeactivatingProduct
+    [Fact]
+    public void ThenProductIsDeactivated()
     {
-        private readonly Product _product;
-        private readonly string _description = "product description";
-        private readonly string _name = "product name";
-        private readonly Sku _sku = new("abc123");
+        _Product.Activate();
+        _Product.Deactivate();
 
-        public WhenDeactivatingProduct()
-        {
-            _product = new(_description, _name, _sku);
-        }
-
-        [Fact]
-        public void ThenProductIsDeactivated()
-        {
-            _product.Activate();
-            _product.Deactivate();
-            _product.Status.Should().Be(ProductStatus.Deactivated);
-        }
+        _Product.Status.Should().Be(ProductStatus.Deactivated);
     }
 }
